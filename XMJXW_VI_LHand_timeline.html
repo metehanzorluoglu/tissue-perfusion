@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Phases Timeline Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --img-width: 500px;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: #0b0b0c;
+      color: #e9eaee;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      /* vertical center */
+      justify-content: center;
+      /* horizontal center */
+    }
+
+    .wrap {
+      width: min(95vw, 1100px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    button {
+      padding: 10px 14px;
+      border: 0;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #2b2f36;
+      color: #e9eaee;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #3a4048;
+    }
+
+    .tag {
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    .imgbox {
+      background: #111418;
+      padding: 10px;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    img {
+      width: min(var(--img-width), 95vw);
+      /* bigger, but still responsive */
+      height: auto;
+      display: block;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="row">
+      <button onclick="playGif()">▶️ Play</button>
+      <button onclick="stopGif()">⏸️ Stop</button>
+      <span class="tag">Order: 0pre → 1tq1 → 2tq2 → 3pst</span>
+    </div>
+    <div class="imgbox">
+      <img id="anim" src="./images/XMJXW_VI_LHand_timeline.png" alt="Phases timeline" />
+    </div>
+  </div>
+  <script>
+    const GIF = "./GIFs/XMJXW_VI_LHand_timeline.gif";
+    const STILL = "./images/XMJXW_VI_LHand_timeline.png";
+    const img = document.getElementById("anim");
+    function playGif() { img.src = GIF + "?t=" + Date.now(); }
+    function stopGif() { img.src = STILL; }
+  </script>
+</body>
+
+</html>
