@@ -1,197 +1,47 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8" />
-  <title>Full • Data_V1 • Uncropped • Infrared</title>
-  <style>
-    body {
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      margin: 24px;
-      color: #111;
-    }
-
-    h1 {
-      font-size: 22px;
-      margin: 0 0 8px 0;
-    }
-
-    h2 {
-      font-size: 16px;
-      color: #333;
-      margin-top: 20px;
-    }
-
-    .container {
-      max-width: 1100px;
-    }
-
-    .meta {
-      color: #555;
-      font-size: 13px;
-      margin-bottom: 16px;
-    }
-
-    figure {
-      margin: 0;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-    }
-
-    .cm {
-      border-collapse: collapse;
-      width: 100%;
-      margin-top: 12px;
-    }
-
-    .cm th,
-    .cm td {
-      border: 1px solid #e5e5e5;
-      padding: 6px 8px;
-      font-size: 13px;
-      text-align: center;
-    }
-
-    .cm thead th {
-      background: #fafafa;
-      position: sticky;
-      top: 0;
-    }
-
-    .footer {
-      margin-top: 24px;
-      font-size: 12px;
-      color: #666;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 14px;
-    }
-
-    .card {
-      border: 1px solid #e7e7e7;
-      border-radius: 10px;
-      padding: 12px;
-      background: #fff;
-    }
-
-    .card a {
-      text-decoration: none;
-      color: #0a58ca;
-    }
-
-    .filename {
-      color: #666;
-      font-size: 12px;
-      margin-top: 4px;
-    }
-  </style>
+<meta charset="utf-8"/>
+<title>Full • Data_V1 • Uncropped • Infrared</title>
+<style>
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; color: #111; }
+h1 { font-size: 22px; margin: 0 0 8px 0; }
+h2 { font-size: 16px; color: #333; margin-top: 20px; }
+.container { max-width: 1100px; }
+.meta { color: #555; font-size: 13px; margin-bottom: 16px; }
+figure { margin: 0; }
+img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; }
+.cm { border-collapse: collapse; width: 100%; margin-top: 12px; }
+.cm th, .cm td { border: 1px solid #e5e5e5; padding: 6px 8px; font-size: 13px; text-align: center; }
+.cm thead th { background: #fafafa; position: sticky; top: 0; }
+.footer { margin-top: 24px; font-size: 12px; color: #666; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.card { border: 1px solid #e7e7e7; border-radius: 10px; padding: 12px; background: #fff; }
+.card a { text-decoration: none; color: #0a58ca; }
+.filename { color: #666; font-size: 12px; margin-top: 4px; }
+</style>
 </head>
-
 <body>
-  <div class="container">
-    <a href="confusion.html">← Back to index</a>
-    <h1>Full • Data_V1 • Uncropped • Infrared</h1>
-    <div class="meta">
-      <div><strong>Image:</strong> <a
-          href="_cm_outputs/CM_Full_Data_V1_Uncropped_Infrared.png">CM_Full_Data_V1_Uncropped_Infrared.png</a></div>
-      <div><strong>Metrics CSV:</strong> <a
-          href="_cm_outputs/CM_Full_Data_V1_Uncropped_Infrared.csv">CM_Full_Data_V1_Uncropped_Infrared.csv</a></div>
-    </div>
-    <figure>
-      <img src="_cm_outputs/CM_Full_Data_V1_Uncropped_Infrared.png"
-        alt="Full • Data_V1 • Uncropped • Infrared confusion matrix" />
-    </figure>
-    <h2>Metrics</h2>
-
-    <table class="cm">
-      <thead>
-        <tr>
-          <th>class</th>
-          <th>TPR</th>
-          <th>FPR</th>
-          <th>PPV</th>
-          <th>ACC</th>
-          <th>total_images</th>
-          <th>TP</th>
-          <th>FN</th>
-          <th>FP</th>
-          <th>TN</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>0pre</td>
-          <td>0.910615</td>
-          <td>0.696111</td>
-          <td>0.20646</td>
-          <td>0.404541</td>
-          <td>2158</td>
-          <td>326</td>
-          <td>32</td>
-          <td>1253</td>
-          <td>547</td>
-        </tr>
-        <tr>
-          <td>1tq1</td>
-          <td>0.108333</td>
-          <td>0.111266</td>
-          <td>0.327731</td>
-          <td>0.62836</td>
-          <td>2158</td>
-          <td>78</td>
-          <td>642</td>
-          <td>160</td>
-          <td>1278</td>
-        </tr>
-        <tr>
-          <td>2tq2</td>
-          <td>0.238889</td>
-          <td>0.096218</td>
-          <td>0.332046</td>
-          <td>0.792864</td>
-          <td>2158</td>
-          <td>86</td>
-          <td>274</td>
-          <td>173</td>
-          <td>1625</td>
-        </tr>
-        <tr>
-          <td>3pst</td>
-          <td>0.101389</td>
-          <td>0.00625869</td>
-          <td>0.890244</td>
-          <td>0.696015</td>
-          <td>2158</td>
-          <td>73</td>
-          <td>647</td>
-          <td>9</td>
-          <td>1429</td>
-        </tr>
-        <tr>
-          <td>overall</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>0.26089</td>
-          <td>2158</td>
-          <td>563</td>
-          <td>1595</td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="footer">Confusion Matrix</div>
+<div class="container">
+  <a href="confusion.html">← Back to index</a>
+  <h1>Full • Data_V1 • Uncropped • Infrared</h1>
+  <div class="meta">
+    <div><strong>Image:</strong> <a href="cm_outputs/CM_Full_Data_V1_Uncropped_Infrared.png">CM_Full_Data_V1_Uncropped_Infrared.png</a></div>
+    <div><strong>Metrics CSV:</strong> <a href="cm_outputs/CM_Full_Data_V1_Uncropped_Infrared.csv">CM_Full_Data_V1_Uncropped_Infrared.csv</a></div>
   </div>
-</body>
+  <figure>
+    <img src="cm_outputs/CM_Full_Data_V1_Uncropped_Infrared.png" alt="Full • Data_V1 • Uncropped • Infrared confusion matrix"/>
+  </figure>
+  <h2>Metrics</h2>
+  
+<table class="cm">
+  <thead><tr><th>class</th><th>TPR</th><th>FPR</th><th>PPV</th><th>ACC</th><th>total_images</th><th>TP</th><th>FN</th><th>FP</th><th>TN</th></tr></thead>
+  <tbody>
+    <tr><td>0pre</td><td>0.910615</td><td>0.696111</td><td>0.20646</td><td>0.404541</td><td>2158</td><td>326</td><td>32</td><td>1253</td><td>547</td></tr><tr><td>1tq1</td><td>0.108333</td><td>0.111266</td><td>0.327731</td><td>0.62836</td><td>2158</td><td>78</td><td>642</td><td>160</td><td>1278</td></tr><tr><td>2tq2</td><td>0.238889</td><td>0.096218</td><td>0.332046</td><td>0.792864</td><td>2158</td><td>86</td><td>274</td><td>173</td><td>1625</td></tr><tr><td>3pst</td><td>0.101389</td><td>0.00625869</td><td>0.890244</td><td>0.696015</td><td>2158</td><td>73</td><td>647</td><td>9</td><td>1429</td></tr><tr><td>overall</td><td></td><td></td><td></td><td>0.26089</td><td>2158</td><td>563</td><td>1595</td><td></td><td></td></tr>
+  </tbody>
+</table>
 
+  <div class="footer">Confusion Matrix</div>
+</div>
+</body>
 </html>
