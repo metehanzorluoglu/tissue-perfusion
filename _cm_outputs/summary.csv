@@ -1,0 +1,25 @@
+title,path_parent,modality_key,modality_name,total_images,accuracy
+RHand • Data_V1 • Uncropped • Infrared,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/Uncropped,ir,Infrared,719,0.319889
+RHand • Data_V1 • Uncropped • Thermal,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/Uncropped,th,Thermal,719,0.602225
+RHand • Data_V1 • Uncropped • Vision,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/Uncropped,vi,Vision,719,0.496523
+RHand • Data_V1 • Uncropped • Late Fusion,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/Uncropped,lf,Late Fusion,719,0.584145
+RHand • Data_V1 • Cropped • Infrared,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/Cropped,ir,Infrared,719,0.310153
+RHand • Data_V1 • Cropped • Thermal,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/Cropped,th,Thermal,719,0.585535
+RHand • Data_V1 • Cropped • Vision,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/Cropped,vi,Vision,719,0.411683
+RHand • Data_V1 • Cropped • Late Fusion,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/Cropped,lf,Late Fusion,719,0.664812
+Full • Data_V2 • Uncropped • Infrared,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V2/Uncropped,ir,Infrared,4318,0.469662
+Full • Data_V2 • Uncropped • Thermal,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V2/Uncropped,th,Thermal,4318,0.564845
+Full • Data_V2 • Uncropped • Vision,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V2/Uncropped,vi,Vision,4318,0.532886
+Full • Data_V2 • Uncropped • Late Fusion,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V2/Uncropped,lf,Late Fusion,4318,0.550023
+Full • Data_V2 • Cropped • Infrared,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V2/Cropped,ir,Infrared,4318,0.408754
+Full • Data_V2 • Cropped • Thermal,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V2/Cropped,th,Thermal,4318,0.559981
+Full • Data_V2 • Cropped • Vision,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V2/Cropped,vi,Vision,4318,0.586846
+Full • Data_V2 • Cropped • Late Fusion,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V2/Cropped,lf,Late Fusion,4318,0.650069
+Full • Data_V1 • Uncropped_V2 • Infrared,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/Uncropped_V2,ir,Infrared,2158,0.34569
+Full • Data_V1 • Uncropped_V2 • Thermal,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/Uncropped_V2,th,Thermal,2158,0.582484
+Full • Data_V1 • Uncropped_V2 • Vision,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/Uncropped_V2,vi,Vision,2158,0.453661
+Full • Data_V1 • Uncropped_V2 • Late Fusion,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/Uncropped_V2,lf,Late Fusion,2158,0.572289
+Full • Data_V1 • Uncropped • Infrared,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/Uncropped,ir,Infrared,2158,0.26089
+Full • Data_V1 • Uncropped • Thermal,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/Uncropped,th,Thermal,2158,0.417053
+Full • Data_V1 • Uncropped • Vision,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/Uncropped,vi,Vision,2158,0.517146
+Full • Data_V1 • Uncropped • Late Fusion,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/Uncropped,lf,Late Fusion,2158,0.435589
