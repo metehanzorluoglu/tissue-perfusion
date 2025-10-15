@@ -1,163 +1,348 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8"/>
-<title>Compare Confusion Matrices</title>
-<style>
-:root {
-  --card-pad: 12px;
-  --radius-lg: 14px;
-  --radius-md: 12px;
-  --radius-sm: 10px;
-  --border: #e3e3e3;
-  --muted: #fafafa;
-}
-* { box-sizing: border-box; }
-body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; color: #111; }
-h1 { font-size: 22px; margin: 0 0 8px 0; }
-h2 { font-size: 16px; color: #333; margin: 8px 0 12px; }
-h3 { font-size: 15px; color: #333; margin: 6px 0 10px; }
-.container { max-width: 1400px; }
-.meta { color: #555; font-size: 13px; margin-bottom: 16px; }
-figure { margin: 0; }
-img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; }
-.cm { border-collapse: collapse; width: 100%; margin-top: 12px; }
-.cm th, .cm td { border: 1px solid #e5e5e5; padding: 6px 8px; font-size: 13px; text-align: center; }
-.cm thead th { background: #fafafa; position: sticky; top: 0; }
-.footer { margin-top: 24px; font-size: 12px; color: #666; }
+  <meta charset="utf-8" />
+  <title>Compare Confusion Matrices</title>
+  <style>
+    :root {
+      --card-pad: 12px;
+      --radius-lg: 14px;
+      --radius-md: 12px;
+      --radius-sm: 10px;
+      --border: #e3e3e3;
+      --muted: #fafafa;
+    }
 
-.card { border: 1px solid #e7e7e7; border-radius: var(--radius-md); padding: var(--card-pad); background: #fff; position: relative; }
-.card a { text-decoration: none; color: #0a58ca; }
-.selbox { position: absolute; top: 10px; right: 10px; transform: scale(1.2); }
-.card.selected { outline: 3px solid #0a58ca; outline-offset: 2px; }
-.leafgrid { display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:10px; }
+    * {
+      box-sizing: border-box;
+    }
 
-.compare-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #0a58ca; color: #fff; border-radius: 999px; padding: 10px 16px; font-weight: 600; box-shadow: 0 6px 20px rgba(0,0,0,.15); cursor: not-allowed; opacity: .4; }
-.compare-bar.enabled { cursor: pointer; opacity: 1; }
-.toolbar { display:flex; gap:10px; align-items:center; margin: 8px 0 16px; }
-.badge { background:#eee; border-radius: 999px; padding:2px 8px; font-size:12px; color:#333; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      margin: 24px;
+      color: #111;
+    }
 
-/* Section (L1) */
-.cat { border:1px solid var(--border); border-radius: var(--radius-lg); padding:14px; margin:18px 0; background: var(--muted); }
-.cat > .cat-title { font-weight:700; font-size:20px; margin-bottom:10px; }
+    h1 {
+      font-size: 22px;
+      margin: 0 0 8px 0;
+    }
 
-/* L2 columns (Data_V1, Data_V2) placed side-by-side */
-.cols-l2 { display:grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap:16px; }
-.box-l2 { border:1px solid #e8e8e8; border-radius: var(--radius-md); padding:12px; background:#fff; }
-.box-l2 > .title { font-weight:700; margin-bottom:8px; }
+    h2 {
+      font-size: 16px;
+      color: #333;
+      margin: 8px 0 12px;
+    }
 
-/* L3 columns inside each L2 (3_Class, 4_Class) side-by-side */
-.cols-l3 { display:grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap:14px; }
-.box-l3 { border:1px dashed #e5e5e5; border-radius: var(--radius-sm); padding:10px; background:#fff; }
-.box-l3 > .title { font-weight:600; font-size:15px; margin-bottom:8px; }
+    h3 {
+      font-size: 15px;
+      color: #333;
+      margin: 6px 0 10px;
+    }
 
-/* L4 blocks */
-.box-l4 { border:1px dashed #e8e8e8; border-radius: var(--radius-sm); padding:10px; background:#fff; margin-bottom:8px; }
-.box-l4 > .title { font-weight:600; font-size:14px; margin-bottom:6px; color:#444; }
+    .container {
+      max-width: 1400px;
+    }
 
-/* L5 blocks */
-.box-l5 { border:1px dotted #eaeaea; border-radius: var(--radius-sm); padding:10px; background:#fff; margin-bottom:6px; }
-.box-l5 > .title { font-weight:600; font-size:13px; margin-bottom:6px; color:#555; }
-</style>
+    .meta {
+      color: #555;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    figure {
+      margin: 0;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    .cm {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .cm th,
+    .cm td {
+      border: 1px solid #e5e5e5;
+      padding: 6px 8px;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .cm thead th {
+      background: #fafafa;
+      position: sticky;
+      top: 0;
+    }
+
+    .footer {
+      margin-top: 24px;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .card {
+      border: 1px solid #e7e7e7;
+      border-radius: var(--radius-md);
+      padding: var(--card-pad);
+      background: #fff;
+      position: relative;
+    }
+
+    .card a {
+      text-decoration: none;
+      color: #0a58ca;
+    }
+
+    .selbox {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      transform: scale(1.2);
+    }
+
+    .card.selected {
+      outline: 3px solid #0a58ca;
+      outline-offset: 2px;
+    }
+
+    .leafgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+    }
+
+    .compare-bar {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0a58ca;
+      color: #fff;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 600;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, .15);
+      cursor: not-allowed;
+      opacity: .4;
+    }
+
+    .compare-bar.enabled {
+      cursor: pointer;
+      opacity: 1;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin: 8px 0 16px;
+    }
+
+    .badge {
+      background: #eee;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 12px;
+      color: #333;
+    }
+
+    /* Section (L1) */
+    .cat {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      margin: 18px 0;
+      background: var(--muted);
+    }
+
+    .cat>.cat-title {
+      font-weight: 700;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    /* L2 columns (Data_V1, Data_V2) placed side-by-side */
+    .cols-l2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 16px;
+    }
+
+    .box-l2 {
+      border: 1px solid #e8e8e8;
+      border-radius: var(--radius-md);
+      padding: 12px;
+      background: #fff;
+    }
+
+    .box-l2>.title {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    /* L3 columns inside each L2 (3_Class, 4_Class) side-by-side */
+    .cols-l3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 14px;
+    }
+
+    .box-l3 {
+      border: 1px dashed #e5e5e5;
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      background: #fff;
+    }
+
+    .box-l3>.title {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    /* L4 blocks */
+    .box-l4 {
+      border: 1px dashed #e8e8e8;
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      background: #fff;
+      margin-bottom: 8px;
+    }
+
+    .box-l4>.title {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #444;
+    }
+
+    /* L5 blocks */
+    .box-l5 {
+      border: 1px dotted #eaeaea;
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      background: #fff;
+      margin-bottom: 6px;
+    }
+
+    .box-l5>.title {
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #555;
+    }
+  </style>
 </head>
+
 <body>
-<div class="container">
-  <a href="confusion.html">← Back to index</a>
-  <h1>Compare</h1>
-  <div class="toolbar">
-    <button class="toggle" id="swapBtn" type="button">Swap left/right</button>
-    <button class="toggle" id="modeBtn" type="button" aria-pressed="false">Mode: Full page</button>
+  <div class="container">
+    <a href="confusion.html">← Back to index</a>
+    <h1>Compare</h1>
+    <div class="toolbar">
+      <button class="toggle" id="swapBtn" type="button">Swap left/right</button>
+      <!-- <button class="toggle" id="modeBtn" type="button" aria-pressed="false">Mode: Full page</button> -->
+    </div>
+    <div class="split" style="display:flex; gap:10px;">
+      <div class="pane" style="flex:1; min-height: 75vh; border:1px solid #e5e5e5; border-radius:8px; overflow:hidden;">
+        <iframe id="left" style="width:100%; height:100%; border:0;"></iframe></div>
+      <div class="pane" style="flex:1; min-height: 75vh; border:1px solid #e5e5e5; border-radius:8px; overflow:hidden;">
+        <iframe id="right" style="width:100%; height:100%; border:0;"></iframe></div>
+    </div>
+    <div class="footer">Tip: scroll either pane to sync the other.</div>
   </div>
-  <div class="split" style="display:flex; gap:10px;">
-    <div class="pane" style="flex:1; min-height: 75vh; border:1px solid #e5e5e5; border-radius:8px; overflow:hidden;"><iframe id="left" style="width:100%; height:100%; border:0;"></iframe></div>
-    <div class="pane" style="flex:1; min-height: 75vh; border:1px solid #e5e5e5; border-radius:8px; overflow:hidden;"><iframe id="right" style="width:100%; height:100%; border:0;"></iframe></div>
-  </div>
-  <div class="footer">Tip: scroll either pane to sync the other.</div>
-</div>
 
-<script>
-(function() {
-  function qs(name) {
-    const u = new URL(window.location.href);
-    return u.searchParams.get(name);
-  }
-  const left = document.getElementById('left');
-  const right = document.getElementById('right');
-  const swapBtn = document.getElementById('swapBtn');
-  const modeBtn = document.getElementById('modeBtn');
-
-  let a = qs('a');
-  let b = qs('b');
-  let mode = qs('mode') || 'full';
-
-  function setModeButton() {
-    const imgMode = (mode === 'images');
-    modeBtn.textContent = 'Mode: ' + (imgMode ? 'Images only' : 'Full page');
-    modeBtn.setAttribute('aria-pressed', String(imgMode));
-  }
-  function loadIframes() {
-    if (!a || !b) {
-      document.body.insertAdjacentHTML('beforeend', '<p style="color:#b00">Missing ?a and ?b params.</p>');
-      return;
-    }
-    if (mode === 'images') {
-      left.src = 'about:blank';
-      right.src = 'about:blank';
-      fetch(a).then(r => r.text()).then(t => {
-        const m = t.match(/<img src="([^"]+)"/i);
-        const title = (t.match(/<h1>(.*?)<\/h1>/i)||[])[1] || a;
-        const img = m ? m[1] : '';
-        const html = '<!doctype html><meta charset="utf-8"><title>'+title+'</title><style>body{margin:8px;font-family:system-ui}img{max-width:100%;height:auto;border:1px solid #ddd;border-radius:8px}</style><h3>'+title+'</h3>'+(img?'<img src="'+img+'">':'<p>No image found</p>');
-        left.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
-      });
-      fetch(b).then(r => r.text()).then(t => {
-        const m = t.match(/<img src="([^"]+)"/i);
-        const title = (t.match(/<h1>(.*?)<\/h1>/i)||[])[1] || b;
-        const img = m ? m[1] : '';
-        const html = '<!doctype html><meta charset="utf-8"><title>'+title+'</title><style>body{margin:8px;font-family:system-ui}img{max-width:100%;height:auto;border:1px solid #ddd;border-radius:8px}</style><h3>'+title+'</h3>'+(img?'<img src="'+img+'">':'<p>No image found</p>');
-        right.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
-      });
-    } else {
-      left.src = a;
-      right.src = b;
-    }
-  }
-  function syncScroll(src, dst) {
-    try {
-      const sDoc = src.contentDocument;
-      const dDoc = dst.contentDocument;
-      if (!sDoc || !dDoc) return;
-      const sEl = sDoc.scrollingElement || sDoc.documentElement;
-      const dEl = dDoc.scrollingElement || dDoc.documentElement;
-      const ratio = sEl.scrollTop / (sEl.scrollHeight - sEl.clientHeight || 1);
-      dEl.scrollTop = ratio * (dEl.scrollHeight - dEl.clientHeight);
-    } catch (e) {}
-  }
-  function attachSync() {
-    let ticking = false;
-    function onScrollL() {
-      if (!ticking) {
-        window.requestAnimationFrame(() => { syncScroll(left, right); ticking = false; });
-        ticking = true;
+  <script>
+    (function () {
+      function qs(name) {
+        const u = new URL(window.location.href);
+        return u.searchParams.get(name);
       }
-    }
-    function onScrollR() {
-      if (!ticking) {
-        window.requestAnimationFrame(() => { syncScroll(right, left); ticking = false; });
-        ticking = true;
+      const left = document.getElementById('left');
+      const right = document.getElementById('right');
+      const swapBtn = document.getElementById('swapBtn');
+      const modeBtn = document.getElementById('modeBtn');
+
+      let a = qs('a');
+      let b = qs('b');
+      let mode = qs('mode') || 'full';
+
+      function setModeButton() {
+        const imgMode = (mode === 'images');
+        modeBtn.textContent = 'Mode: ' + (imgMode ? 'Images only' : 'Full page');
+        modeBtn.setAttribute('aria-pressed', String(imgMode));
       }
-    }
-    left.addEventListener('load', () => {
-      try { left.contentWindow.addEventListener('scroll', onScrollL, { passive: true }); } catch (e) {}
-    });
-    right.addEventListener('load', () => {
-      try { right.contentWindow.addEventListener('scroll', onScrollR, { passive: true }); } catch (e) {}
-    });
-  }
-  swapBtn.addEventListener('click', () => { const t = a; a = b; b = t; loadIframes(); });
-  modeBtn.addEventListener('click', () => { mode = (mode === 'images') ? 'full' : 'images'; setModeButton(); loadIframes(); });
-  setModeButton(); loadIframes(); attachSync();
-})();
-</script>
+      function loadIframes() {
+        if (!a || !b) {
+          document.body.insertAdjacentHTML('beforeend', '<p style="color:#b00">Missing ?a and ?b params.</p>');
+          return;
+        }
+        if (mode === 'images') {
+          left.src = 'about:blank';
+          right.src = 'about:blank';
+          fetch(a).then(r => r.text()).then(t => {
+            const m = t.match(/<img src="([^"]+)"/i);
+            const title = (t.match(/<h1>(.*?)<\/h1>/i) || [])[1] || a;
+            const img = m ? m[1] : '';
+            const html = '<!doctype html><meta charset="utf-8"><title>' + title + '</title><style>body{margin:8px;font-family:system-ui}img{max-width:100%;height:auto;border:1px solid #ddd;border-radius:8px}</style><h3>' + title + '</h3>' + (img ? '<img src="' + img + '">' : '<p>No image found</p>');
+            left.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+          });
+          fetch(b).then(r => r.text()).then(t => {
+            const m = t.match(/<img src="([^"]+)"/i);
+            const title = (t.match(/<h1>(.*?)<\/h1>/i) || [])[1] || b;
+            const img = m ? m[1] : '';
+            const html = '<!doctype html><meta charset="utf-8"><title>' + title + '</title><style>body{margin:8px;font-family:system-ui}img{max-width:100%;height:auto;border:1px solid #ddd;border-radius:8px}</style><h3>' + title + '</h3>' + (img ? '<img src="' + img + '">' : '<p>No image found</p>');
+            right.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+          });
+        } else {
+          left.src = a;
+          right.src = b;
+        }
+      }
+      function syncScroll(src, dst) {
+        try {
+          const sDoc = src.contentDocument;
+          const dDoc = dst.contentDocument;
+          if (!sDoc || !dDoc) return;
+          const sEl = sDoc.scrollingElement || sDoc.documentElement;
+          const dEl = dDoc.scrollingElement || dDoc.documentElement;
+          const ratio = sEl.scrollTop / (sEl.scrollHeight - sEl.clientHeight || 1);
+          dEl.scrollTop = ratio * (dEl.scrollHeight - dEl.clientHeight);
+        } catch (e) { }
+      }
+      function attachSync() {
+        let ticking = false;
+        function onScrollL() {
+          if (!ticking) {
+            window.requestAnimationFrame(() => { syncScroll(left, right); ticking = false; });
+            ticking = true;
+          }
+        }
+        function onScrollR() {
+          if (!ticking) {
+            window.requestAnimationFrame(() => { syncScroll(right, left); ticking = false; });
+            ticking = true;
+          }
+        }
+        left.addEventListener('load', () => {
+          try { left.contentWindow.addEventListener('scroll', onScrollL, { passive: true }); } catch (e) { }
+        });
+        right.addEventListener('load', () => {
+          try { right.contentWindow.addEventListener('scroll', onScrollR, { passive: true }); } catch (e) { }
+        });
+      }
+      swapBtn.addEventListener('click', () => { const t = a; a = b; b = t; loadIframes(); });
+      modeBtn.addEventListener('click', () => { mode = (mode === 'images') ? 'full' : 'images'; setModeButton(); loadIframes(); });
+      setModeButton(); loadIframes(); attachSync();
+    })();
+  </script>
 </body>
+
 </html>
