@@ -4,10 +4,20 @@
 <meta charset="utf-8"/>
 <title>Confusion Matrix Reports</title>
 <style>
+:root {
+  --card-pad: 12px;
+  --radius-lg: 14px;
+  --radius-md: 12px;
+  --radius-sm: 10px;
+  --border: #e3e3e3;
+  --muted: #fafafa;
+}
+* { box-sizing: border-box; }
 body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; color: #111; }
 h1 { font-size: 22px; margin: 0 0 8px 0; }
-h2 { font-size: 16px; color: #333; margin-top: 20px; }
-.container { max-width: 1200px; }
+h2 { font-size: 16px; color: #333; margin: 8px 0 12px; }
+h3 { font-size: 15px; color: #333; margin: 6px 0 10px; }
+.container { max-width: 1400px; }
 .meta { color: #555; font-size: 13px; margin-bottom: 16px; }
 figure { margin: 0; }
 img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; }
@@ -15,20 +25,39 @@ img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;
 .cm th, .cm td { border: 1px solid #e5e5e5; padding: 6px 8px; font-size: 13px; text-align: center; }
 .cm thead th { background: #fafafa; position: sticky; top: 0; }
 .footer { margin-top: 24px; font-size: 12px; color: #666; }
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
-.card { border: 1px solid #e7e7e7; border-radius: 10px; padding: 12px; background: #fff; position: relative; }
+
+.card { border: 1px solid #e7e7e7; border-radius: var(--radius-md); padding: var(--card-pad); background: #fff; position: relative; }
 .card a { text-decoration: none; color: #0a58ca; }
-.filename { color: #666; font-size: 12px; margin-top: 4px; }
 .selbox { position: absolute; top: 10px; right: 10px; transform: scale(1.2); }
 .card.selected { outline: 3px solid #0a58ca; outline-offset: 2px; }
+.leafgrid { display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:10px; }
+
 .compare-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #0a58ca; color: #fff; border-radius: 999px; padding: 10px 16px; font-weight: 600; box-shadow: 0 6px 20px rgba(0,0,0,.15); cursor: not-allowed; opacity: .4; }
 .compare-bar.enabled { cursor: pointer; opacity: 1; }
-.toolbar { display:flex; gap:10px; align-items:center; margin: 8px 0 16px;}
+.toolbar { display:flex; gap:10px; align-items:center; margin: 8px 0 16px; }
 .badge { background:#eee; border-radius: 999px; padding:2px 8px; font-size:12px; color:#333; }
-.split { display:flex; gap:10px; }
-.pane { flex:1; min-height: 75vh; border:1px solid #e5e5e5; border-radius:8px; overflow:hidden; }
-.pane iframe { width:100%; height:100%; border:0; }
-.toggle { border:1px solid #ccc; background:#fff; padding:6px 10px; border-radius:8px; cursor:pointer; }
+
+/* Section (L1) */
+.cat { border:1px solid var(--border); border-radius: var(--radius-lg); padding:14px; margin:18px 0; background: var(--muted); }
+.cat > .cat-title { font-weight:700; font-size:20px; margin-bottom:10px; }
+
+/* L2 columns (Data_V1, Data_V2) placed side-by-side */
+.cols-l2 { display:grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap:16px; }
+.box-l2 { border:1px solid #e8e8e8; border-radius: var(--radius-md); padding:12px; background:#fff; }
+.box-l2 > .title { font-weight:700; margin-bottom:8px; }
+
+/* L3 columns inside each L2 (3_Class, 4_Class) side-by-side */
+.cols-l3 { display:grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap:14px; }
+.box-l3 { border:1px dashed #e5e5e5; border-radius: var(--radius-sm); padding:10px; background:#fff; }
+.box-l3 > .title { font-weight:600; font-size:15px; margin-bottom:8px; }
+
+/* L4 blocks */
+.box-l4 { border:1px dashed #e8e8e8; border-radius: var(--radius-sm); padding:10px; background:#fff; margin-bottom:8px; }
+.box-l4 > .title { font-weight:600; font-size:14px; margin-bottom:6px; color:#444; }
+
+/* L5 blocks */
+.box-l5 { border:1px dotted #eaeaea; border-radius: var(--radius-sm); padding:10px; background:#fff; margin-bottom:6px; }
+.box-l5 > .title { font-weight:600; font-size:13px; margin-bottom:6px; color:#555; }
 </style>
 </head>
 <body>
@@ -38,246 +67,313 @@ img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;
     <span class="badge" id="selCount">0 selected</span>
     <button class="toggle" id="clearSel" type="button">Clear selection</button>
   </div>
-  <div class="grid" id="grid">
+
+  
+<section class="cat">
+  <div class="cat-title">Full</div>
+  <div class="cols-l2">
     
-<div class="card" data-page="CM_Full_Data_V1_Uncropped_Infrared.html" data-title="Full • Data_V1 • Uncropped • Infrared">
-  <input type="checkbox" class="selbox" aria-label="Select Full • Data_V1 • Uncropped • Infrared"/>
-  <a href="CM_Full_Data_V1_Uncropped_Infrared.html"><strong>Full • Data_V1 • Uncropped • Infrared</strong></a>
-  <div class="filename">CM_Full_Data_V1_Uncropped_Infrared.png</div>
-  <a href="CM_Full_Data_V1_Uncropped_Infrared.html"><img src="cm_outputs/CM_Full_Data_V1_Uncropped_Infrared.png" alt="Full • Data_V1 • Uncropped • Infrared thumbnail"/></a>
+<div class="box-l2">
+  <div class="title">Data_V1</div>
+  <div class="cols-l3">
+    
+<div class="box-l3">
+  <div class="title">4_Class</div>
+  
+<div class="box-l4">
+  <div class="title">Clean</div>
+  
+<div class="box-l5">
+  <div class="title">Uncropped</div>
+  <div class="leafgrid">
+<div class="card" data-page="CM_Full_Data_V1_4_Class_Clean_Uncropped_Infrared.html" data-title="Infrared">
+  <input type="checkbox" class="selbox" aria-label="Select Infrared"/>
+  <a href="CM_Full_Data_V1_4_Class_Clean_Uncropped_Infrared.html"><strong>Infrared</strong></a>
+  <a href="CM_Full_Data_V1_4_Class_Clean_Uncropped_Infrared.html"><img src="cm_outputs/CM_Full_Data_V1_4_Class_Clean_Uncropped_Infrared.png" alt="Infrared thumbnail"/></a>
 </div>
-
-<div class="card" data-page="CM_Full_Data_V1_Uncropped_Late_Fusion.html" data-title="Full • Data_V1 • Uncropped • Late • Fusion">
-  <input type="checkbox" class="selbox" aria-label="Select Full • Data_V1 • Uncropped • Late • Fusion"/>
-  <a href="CM_Full_Data_V1_Uncropped_Late_Fusion.html"><strong>Full • Data_V1 • Uncropped • Late • Fusion</strong></a>
-  <div class="filename">CM_Full_Data_V1_Uncropped_Late_Fusion.png</div>
-  <a href="CM_Full_Data_V1_Uncropped_Late_Fusion.html"><img src="cm_outputs/CM_Full_Data_V1_Uncropped_Late_Fusion.png" alt="Full • Data_V1 • Uncropped • Late • Fusion thumbnail"/></a>
+<div class="card" data-page="CM_Full_Data_V1_4_Class_Clean_Uncropped_Late_Fusion.html" data-title="Late Fusion">
+  <input type="checkbox" class="selbox" aria-label="Select Late Fusion"/>
+  <a href="CM_Full_Data_V1_4_Class_Clean_Uncropped_Late_Fusion.html"><strong>Late Fusion</strong></a>
+  <a href="CM_Full_Data_V1_4_Class_Clean_Uncropped_Late_Fusion.html"><img src="cm_outputs/CM_Full_Data_V1_4_Class_Clean_Uncropped_Late_Fusion.png" alt="Late Fusion thumbnail"/></a>
 </div>
-
-<div class="card" data-page="CM_Full_Data_V1_Uncropped_Thermal.html" data-title="Full • Data_V1 • Uncropped • Thermal">
-  <input type="checkbox" class="selbox" aria-label="Select Full • Data_V1 • Uncropped • Thermal"/>
-  <a href="CM_Full_Data_V1_Uncropped_Thermal.html"><strong>Full • Data_V1 • Uncropped • Thermal</strong></a>
-  <div class="filename">CM_Full_Data_V1_Uncropped_Thermal.png</div>
-  <a href="CM_Full_Data_V1_Uncropped_Thermal.html"><img src="cm_outputs/CM_Full_Data_V1_Uncropped_Thermal.png" alt="Full • Data_V1 • Uncropped • Thermal thumbnail"/></a>
+<div class="card" data-page="CM_Full_Data_V1_4_Class_Clean_Uncropped_Thermal.html" data-title="Thermal">
+  <input type="checkbox" class="selbox" aria-label="Select Thermal"/>
+  <a href="CM_Full_Data_V1_4_Class_Clean_Uncropped_Thermal.html"><strong>Thermal</strong></a>
+  <a href="CM_Full_Data_V1_4_Class_Clean_Uncropped_Thermal.html"><img src="cm_outputs/CM_Full_Data_V1_4_Class_Clean_Uncropped_Thermal.png" alt="Thermal thumbnail"/></a>
 </div>
-
-<div class="card" data-page="CM_Full_Data_V1_Uncropped_V2_Infrared.html" data-title="Full • Data_V1 • Uncropped • V2 • Infrared">
-  <input type="checkbox" class="selbox" aria-label="Select Full • Data_V1 • Uncropped • V2 • Infrared"/>
-  <a href="CM_Full_Data_V1_Uncropped_V2_Infrared.html"><strong>Full • Data_V1 • Uncropped • V2 • Infrared</strong></a>
-  <div class="filename">CM_Full_Data_V1_Uncropped_V2_Infrared.png</div>
-  <a href="CM_Full_Data_V1_Uncropped_V2_Infrared.html"><img src="cm_outputs/CM_Full_Data_V1_Uncropped_V2_Infrared.png" alt="Full • Data_V1 • Uncropped • V2 • Infrared thumbnail"/></a>
+<div class="card" data-page="CM_Full_Data_V1_4_Class_Clean_Uncropped_Vision.html" data-title="Vision">
+  <input type="checkbox" class="selbox" aria-label="Select Vision"/>
+  <a href="CM_Full_Data_V1_4_Class_Clean_Uncropped_Vision.html"><strong>Vision</strong></a>
+  <a href="CM_Full_Data_V1_4_Class_Clean_Uncropped_Vision.html"><img src="cm_outputs/CM_Full_Data_V1_4_Class_Clean_Uncropped_Vision.png" alt="Vision thumbnail"/></a>
+</div></div>
 </div>
-
-<div class="card" data-page="CM_Full_Data_V1_Uncropped_V2_Late_Fusion.html" data-title="Full • Data_V1 • Uncropped • V2 • Late • Fusion">
-  <input type="checkbox" class="selbox" aria-label="Select Full • Data_V1 • Uncropped • V2 • Late • Fusion"/>
-  <a href="CM_Full_Data_V1_Uncropped_V2_Late_Fusion.html"><strong>Full • Data_V1 • Uncropped • V2 • Late • Fusion</strong></a>
-  <div class="filename">CM_Full_Data_V1_Uncropped_V2_Late_Fusion.png</div>
-  <a href="CM_Full_Data_V1_Uncropped_V2_Late_Fusion.html"><img src="cm_outputs/CM_Full_Data_V1_Uncropped_V2_Late_Fusion.png" alt="Full • Data_V1 • Uncropped • V2 • Late • Fusion thumbnail"/></a>
 </div>
-
-<div class="card" data-page="CM_Full_Data_V1_Uncropped_V2_Thermal.html" data-title="Full • Data_V1 • Uncropped • V2 • Thermal">
-  <input type="checkbox" class="selbox" aria-label="Select Full • Data_V1 • Uncropped • V2 • Thermal"/>
-  <a href="CM_Full_Data_V1_Uncropped_V2_Thermal.html"><strong>Full • Data_V1 • Uncropped • V2 • Thermal</strong></a>
-  <div class="filename">CM_Full_Data_V1_Uncropped_V2_Thermal.png</div>
-  <a href="CM_Full_Data_V1_Uncropped_V2_Thermal.html"><img src="cm_outputs/CM_Full_Data_V1_Uncropped_V2_Thermal.png" alt="Full • Data_V1 • Uncropped • V2 • Thermal thumbnail"/></a>
+<div class="box-l4">
+  <div class="title">NonClean</div>
+  
+<div class="box-l5">
+  <div class="title">Uncropped</div>
+  <div class="leafgrid">
+<div class="card" data-page="CM_Full_Data_V1_4_Class_NonClean_Uncropped_Infrared.html" data-title="Infrared">
+  <input type="checkbox" class="selbox" aria-label="Select Infrared"/>
+  <a href="CM_Full_Data_V1_4_Class_NonClean_Uncropped_Infrared.html"><strong>Infrared</strong></a>
+  <a href="CM_Full_Data_V1_4_Class_NonClean_Uncropped_Infrared.html"><img src="cm_outputs/CM_Full_Data_V1_4_Class_NonClean_Uncropped_Infrared.png" alt="Infrared thumbnail"/></a>
 </div>
-
-<div class="card" data-page="CM_Full_Data_V1_Uncropped_V2_Vision.html" data-title="Full • Data_V1 • Uncropped • V2 • Vision">
-  <input type="checkbox" class="selbox" aria-label="Select Full • Data_V1 • Uncropped • V2 • Vision"/>
-  <a href="CM_Full_Data_V1_Uncropped_V2_Vision.html"><strong>Full • Data_V1 • Uncropped • V2 • Vision</strong></a>
-  <div class="filename">CM_Full_Data_V1_Uncropped_V2_Vision.png</div>
-  <a href="CM_Full_Data_V1_Uncropped_V2_Vision.html"><img src="cm_outputs/CM_Full_Data_V1_Uncropped_V2_Vision.png" alt="Full • Data_V1 • Uncropped • V2 • Vision thumbnail"/></a>
+<div class="card" data-page="CM_Full_Data_V1_4_Class_NonClean_Uncropped_Late_Fusion.html" data-title="Late Fusion">
+  <input type="checkbox" class="selbox" aria-label="Select Late Fusion"/>
+  <a href="CM_Full_Data_V1_4_Class_NonClean_Uncropped_Late_Fusion.html"><strong>Late Fusion</strong></a>
+  <a href="CM_Full_Data_V1_4_Class_NonClean_Uncropped_Late_Fusion.html"><img src="cm_outputs/CM_Full_Data_V1_4_Class_NonClean_Uncropped_Late_Fusion.png" alt="Late Fusion thumbnail"/></a>
 </div>
-
-<div class="card" data-page="CM_Full_Data_V1_Uncropped_Vision.html" data-title="Full • Data_V1 • Uncropped • Vision">
-  <input type="checkbox" class="selbox" aria-label="Select Full • Data_V1 • Uncropped • Vision"/>
-  <a href="CM_Full_Data_V1_Uncropped_Vision.html"><strong>Full • Data_V1 • Uncropped • Vision</strong></a>
-  <div class="filename">CM_Full_Data_V1_Uncropped_Vision.png</div>
-  <a href="CM_Full_Data_V1_Uncropped_Vision.html"><img src="cm_outputs/CM_Full_Data_V1_Uncropped_Vision.png" alt="Full • Data_V1 • Uncropped • Vision thumbnail"/></a>
+<div class="card" data-page="CM_Full_Data_V1_4_Class_NonClean_Uncropped_Thermal.html" data-title="Thermal">
+  <input type="checkbox" class="selbox" aria-label="Select Thermal"/>
+  <a href="CM_Full_Data_V1_4_Class_NonClean_Uncropped_Thermal.html"><strong>Thermal</strong></a>
+  <a href="CM_Full_Data_V1_4_Class_NonClean_Uncropped_Thermal.html"><img src="cm_outputs/CM_Full_Data_V1_4_Class_NonClean_Uncropped_Thermal.png" alt="Thermal thumbnail"/></a>
 </div>
-
-<div class="card" data-page="CM_Full_Data_V2_Cropped_Infrared.html" data-title="Full • Data_V2 • Cropped • Infrared">
-  <input type="checkbox" class="selbox" aria-label="Select Full • Data_V2 • Cropped • Infrared"/>
-  <a href="CM_Full_Data_V2_Cropped_Infrared.html"><strong>Full • Data_V2 • Cropped • Infrared</strong></a>
-  <div class="filename">CM_Full_Data_V2_Cropped_Infrared.png</div>
-  <a href="CM_Full_Data_V2_Cropped_Infrared.html"><img src="cm_outputs/CM_Full_Data_V2_Cropped_Infrared.png" alt="Full • Data_V2 • Cropped • Infrared thumbnail"/></a>
+<div class="card" data-page="CM_Full_Data_V1_4_Class_NonClean_Uncropped_Vision.html" data-title="Vision">
+  <input type="checkbox" class="selbox" aria-label="Select Vision"/>
+  <a href="CM_Full_Data_V1_4_Class_NonClean_Uncropped_Vision.html"><strong>Vision</strong></a>
+  <a href="CM_Full_Data_V1_4_Class_NonClean_Uncropped_Vision.html"><img src="cm_outputs/CM_Full_Data_V1_4_Class_NonClean_Uncropped_Vision.png" alt="Vision thumbnail"/></a>
+</div></div>
 </div>
-
-<div class="card" data-page="CM_Full_Data_V2_Cropped_Late_Fusion.html" data-title="Full • Data_V2 • Cropped • Late • Fusion">
-  <input type="checkbox" class="selbox" aria-label="Select Full • Data_V2 • Cropped • Late • Fusion"/>
-  <a href="CM_Full_Data_V2_Cropped_Late_Fusion.html"><strong>Full • Data_V2 • Cropped • Late • Fusion</strong></a>
-  <div class="filename">CM_Full_Data_V2_Cropped_Late_Fusion.png</div>
-  <a href="CM_Full_Data_V2_Cropped_Late_Fusion.html"><img src="cm_outputs/CM_Full_Data_V2_Cropped_Late_Fusion.png" alt="Full • Data_V2 • Cropped • Late • Fusion thumbnail"/></a>
 </div>
-
-<div class="card" data-page="CM_Full_Data_V2_Cropped_Thermal.html" data-title="Full • Data_V2 • Cropped • Thermal">
-  <input type="checkbox" class="selbox" aria-label="Select Full • Data_V2 • Cropped • Thermal"/>
-  <a href="CM_Full_Data_V2_Cropped_Thermal.html"><strong>Full • Data_V2 • Cropped • Thermal</strong></a>
-  <div class="filename">CM_Full_Data_V2_Cropped_Thermal.png</div>
-  <a href="CM_Full_Data_V2_Cropped_Thermal.html"><img src="cm_outputs/CM_Full_Data_V2_Cropped_Thermal.png" alt="Full • Data_V2 • Cropped • Thermal thumbnail"/></a>
 </div>
-
-<div class="card" data-page="CM_Full_Data_V2_Cropped_Vision.html" data-title="Full • Data_V2 • Cropped • Vision">
-  <input type="checkbox" class="selbox" aria-label="Select Full • Data_V2 • Cropped • Vision"/>
-  <a href="CM_Full_Data_V2_Cropped_Vision.html"><strong>Full • Data_V2 • Cropped • Vision</strong></a>
-  <div class="filename">CM_Full_Data_V2_Cropped_Vision.png</div>
-  <a href="CM_Full_Data_V2_Cropped_Vision.html"><img src="cm_outputs/CM_Full_Data_V2_Cropped_Vision.png" alt="Full • Data_V2 • Cropped • Vision thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_Full_Data_V2_Uncropped_Infrared.html" data-title="Full • Data_V2 • Uncropped • Infrared">
-  <input type="checkbox" class="selbox" aria-label="Select Full • Data_V2 • Uncropped • Infrared"/>
-  <a href="CM_Full_Data_V2_Uncropped_Infrared.html"><strong>Full • Data_V2 • Uncropped • Infrared</strong></a>
-  <div class="filename">CM_Full_Data_V2_Uncropped_Infrared.png</div>
-  <a href="CM_Full_Data_V2_Uncropped_Infrared.html"><img src="cm_outputs/CM_Full_Data_V2_Uncropped_Infrared.png" alt="Full • Data_V2 • Uncropped • Infrared thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_Full_Data_V2_Uncropped_Late_Fusion.html" data-title="Full • Data_V2 • Uncropped • Late • Fusion">
-  <input type="checkbox" class="selbox" aria-label="Select Full • Data_V2 • Uncropped • Late • Fusion"/>
-  <a href="CM_Full_Data_V2_Uncropped_Late_Fusion.html"><strong>Full • Data_V2 • Uncropped • Late • Fusion</strong></a>
-  <div class="filename">CM_Full_Data_V2_Uncropped_Late_Fusion.png</div>
-  <a href="CM_Full_Data_V2_Uncropped_Late_Fusion.html"><img src="cm_outputs/CM_Full_Data_V2_Uncropped_Late_Fusion.png" alt="Full • Data_V2 • Uncropped • Late • Fusion thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_Full_Data_V2_Uncropped_Thermal.html" data-title="Full • Data_V2 • Uncropped • Thermal">
-  <input type="checkbox" class="selbox" aria-label="Select Full • Data_V2 • Uncropped • Thermal"/>
-  <a href="CM_Full_Data_V2_Uncropped_Thermal.html"><strong>Full • Data_V2 • Uncropped • Thermal</strong></a>
-  <div class="filename">CM_Full_Data_V2_Uncropped_Thermal.png</div>
-  <a href="CM_Full_Data_V2_Uncropped_Thermal.html"><img src="cm_outputs/CM_Full_Data_V2_Uncropped_Thermal.png" alt="Full • Data_V2 • Uncropped • Thermal thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_Full_Data_V2_Uncropped_Vision.html" data-title="Full • Data_V2 • Uncropped • Vision">
-  <input type="checkbox" class="selbox" aria-label="Select Full • Data_V2 • Uncropped • Vision"/>
-  <a href="CM_Full_Data_V2_Uncropped_Vision.html"><strong>Full • Data_V2 • Uncropped • Vision</strong></a>
-  <div class="filename">CM_Full_Data_V2_Uncropped_Vision.png</div>
-  <a href="CM_Full_Data_V2_Uncropped_Vision.html"><img src="cm_outputs/CM_Full_Data_V2_Uncropped_Vision.png" alt="Full • Data_V2 • Uncropped • Vision thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_RHand_Data_V1_3_Class_uncropped_Infrared.html" data-title="RHand • Data_V1 • 3 • Class • uncropped • Infrared">
-  <input type="checkbox" class="selbox" aria-label="Select RHand • Data_V1 • 3 • Class • uncropped • Infrared"/>
-  <a href="CM_RHand_Data_V1_3_Class_uncropped_Infrared.html"><strong>RHand • Data_V1 • 3 • Class • uncropped • Infrared</strong></a>
-  <div class="filename">CM_RHand_Data_V1_3_Class_uncropped_Infrared.png</div>
-  <a href="CM_RHand_Data_V1_3_Class_uncropped_Infrared.html"><img src="cm_outputs/CM_RHand_Data_V1_3_Class_uncropped_Infrared.png" alt="RHand • Data_V1 • 3 • Class • uncropped • Infrared thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_RHand_Data_V1_3_Class_uncropped_Late_Fusion.html" data-title="RHand • Data_V1 • 3 • Class • uncropped • Late • Fusion">
-  <input type="checkbox" class="selbox" aria-label="Select RHand • Data_V1 • 3 • Class • uncropped • Late • Fusion"/>
-  <a href="CM_RHand_Data_V1_3_Class_uncropped_Late_Fusion.html"><strong>RHand • Data_V1 • 3 • Class • uncropped • Late • Fusion</strong></a>
-  <div class="filename">CM_RHand_Data_V1_3_Class_uncropped_Late_Fusion.png</div>
-  <a href="CM_RHand_Data_V1_3_Class_uncropped_Late_Fusion.html"><img src="cm_outputs/CM_RHand_Data_V1_3_Class_uncropped_Late_Fusion.png" alt="RHand • Data_V1 • 3 • Class • uncropped • Late • Fusion thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_RHand_Data_V1_3_Class_uncropped_Thermal.html" data-title="RHand • Data_V1 • 3 • Class • uncropped • Thermal">
-  <input type="checkbox" class="selbox" aria-label="Select RHand • Data_V1 • 3 • Class • uncropped • Thermal"/>
-  <a href="CM_RHand_Data_V1_3_Class_uncropped_Thermal.html"><strong>RHand • Data_V1 • 3 • Class • uncropped • Thermal</strong></a>
-  <div class="filename">CM_RHand_Data_V1_3_Class_uncropped_Thermal.png</div>
-  <a href="CM_RHand_Data_V1_3_Class_uncropped_Thermal.html"><img src="cm_outputs/CM_RHand_Data_V1_3_Class_uncropped_Thermal.png" alt="RHand • Data_V1 • 3 • Class • uncropped • Thermal thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_RHand_Data_V1_3_Class_uncropped_Vision.html" data-title="RHand • Data_V1 • 3 • Class • uncropped • Vision">
-  <input type="checkbox" class="selbox" aria-label="Select RHand • Data_V1 • 3 • Class • uncropped • Vision"/>
-  <a href="CM_RHand_Data_V1_3_Class_uncropped_Vision.html"><strong>RHand • Data_V1 • 3 • Class • uncropped • Vision</strong></a>
-  <div class="filename">CM_RHand_Data_V1_3_Class_uncropped_Vision.png</div>
-  <a href="CM_RHand_Data_V1_3_Class_uncropped_Vision.html"><img src="cm_outputs/CM_RHand_Data_V1_3_Class_uncropped_Vision.png" alt="RHand • Data_V1 • 3 • Class • uncropped • Vision thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_RHand_Data_V1_Clean_Cropped_Infrared.html" data-title="RHand • Data_V1 • Clean • Cropped • Infrared">
-  <input type="checkbox" class="selbox" aria-label="Select RHand • Data_V1 • Clean • Cropped • Infrared"/>
-  <a href="CM_RHand_Data_V1_Clean_Cropped_Infrared.html"><strong>RHand • Data_V1 • Clean • Cropped • Infrared</strong></a>
-  <div class="filename">CM_RHand_Data_V1_Clean_Cropped_Infrared.png</div>
-  <a href="CM_RHand_Data_V1_Clean_Cropped_Infrared.html"><img src="cm_outputs/CM_RHand_Data_V1_Clean_Cropped_Infrared.png" alt="RHand • Data_V1 • Clean • Cropped • Infrared thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_RHand_Data_V1_Clean_Cropped_Late_Fusion.html" data-title="RHand • Data_V1 • Clean • Cropped • Late • Fusion">
-  <input type="checkbox" class="selbox" aria-label="Select RHand • Data_V1 • Clean • Cropped • Late • Fusion"/>
-  <a href="CM_RHand_Data_V1_Clean_Cropped_Late_Fusion.html"><strong>RHand • Data_V1 • Clean • Cropped • Late • Fusion</strong></a>
-  <div class="filename">CM_RHand_Data_V1_Clean_Cropped_Late_Fusion.png</div>
-  <a href="CM_RHand_Data_V1_Clean_Cropped_Late_Fusion.html"><img src="cm_outputs/CM_RHand_Data_V1_Clean_Cropped_Late_Fusion.png" alt="RHand • Data_V1 • Clean • Cropped • Late • Fusion thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_RHand_Data_V1_Clean_Cropped_Thermal.html" data-title="RHand • Data_V1 • Clean • Cropped • Thermal">
-  <input type="checkbox" class="selbox" aria-label="Select RHand • Data_V1 • Clean • Cropped • Thermal"/>
-  <a href="CM_RHand_Data_V1_Clean_Cropped_Thermal.html"><strong>RHand • Data_V1 • Clean • Cropped • Thermal</strong></a>
-  <div class="filename">CM_RHand_Data_V1_Clean_Cropped_Thermal.png</div>
-  <a href="CM_RHand_Data_V1_Clean_Cropped_Thermal.html"><img src="cm_outputs/CM_RHand_Data_V1_Clean_Cropped_Thermal.png" alt="RHand • Data_V1 • Clean • Cropped • Thermal thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_RHand_Data_V1_Clean_Cropped_Vision.html" data-title="RHand • Data_V1 • Clean • Cropped • Vision">
-  <input type="checkbox" class="selbox" aria-label="Select RHand • Data_V1 • Clean • Cropped • Vision"/>
-  <a href="CM_RHand_Data_V1_Clean_Cropped_Vision.html"><strong>RHand • Data_V1 • Clean • Cropped • Vision</strong></a>
-  <div class="filename">CM_RHand_Data_V1_Clean_Cropped_Vision.png</div>
-  <a href="CM_RHand_Data_V1_Clean_Cropped_Vision.html"><img src="cm_outputs/CM_RHand_Data_V1_Clean_Cropped_Vision.png" alt="RHand • Data_V1 • Clean • Cropped • Vision thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_RHand_Data_V1_NonClean_Cropped_Infrared.html" data-title="RHand • Data_V1 • NonClean • Cropped • Infrared">
-  <input type="checkbox" class="selbox" aria-label="Select RHand • Data_V1 • NonClean • Cropped • Infrared"/>
-  <a href="CM_RHand_Data_V1_NonClean_Cropped_Infrared.html"><strong>RHand • Data_V1 • NonClean • Cropped • Infrared</strong></a>
-  <div class="filename">CM_RHand_Data_V1_NonClean_Cropped_Infrared.png</div>
-  <a href="CM_RHand_Data_V1_NonClean_Cropped_Infrared.html"><img src="cm_outputs/CM_RHand_Data_V1_NonClean_Cropped_Infrared.png" alt="RHand • Data_V1 • NonClean • Cropped • Infrared thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_RHand_Data_V1_NonClean_Cropped_Late_Fusion.html" data-title="RHand • Data_V1 • NonClean • Cropped • Late • Fusion">
-  <input type="checkbox" class="selbox" aria-label="Select RHand • Data_V1 • NonClean • Cropped • Late • Fusion"/>
-  <a href="CM_RHand_Data_V1_NonClean_Cropped_Late_Fusion.html"><strong>RHand • Data_V1 • NonClean • Cropped • Late • Fusion</strong></a>
-  <div class="filename">CM_RHand_Data_V1_NonClean_Cropped_Late_Fusion.png</div>
-  <a href="CM_RHand_Data_V1_NonClean_Cropped_Late_Fusion.html"><img src="cm_outputs/CM_RHand_Data_V1_NonClean_Cropped_Late_Fusion.png" alt="RHand • Data_V1 • NonClean • Cropped • Late • Fusion thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_RHand_Data_V1_NonClean_Cropped_Thermal.html" data-title="RHand • Data_V1 • NonClean • Cropped • Thermal">
-  <input type="checkbox" class="selbox" aria-label="Select RHand • Data_V1 • NonClean • Cropped • Thermal"/>
-  <a href="CM_RHand_Data_V1_NonClean_Cropped_Thermal.html"><strong>RHand • Data_V1 • NonClean • Cropped • Thermal</strong></a>
-  <div class="filename">CM_RHand_Data_V1_NonClean_Cropped_Thermal.png</div>
-  <a href="CM_RHand_Data_V1_NonClean_Cropped_Thermal.html"><img src="cm_outputs/CM_RHand_Data_V1_NonClean_Cropped_Thermal.png" alt="RHand • Data_V1 • NonClean • Cropped • Thermal thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_RHand_Data_V1_NonClean_Cropped_Vision.html" data-title="RHand • Data_V1 • NonClean • Cropped • Vision">
-  <input type="checkbox" class="selbox" aria-label="Select RHand • Data_V1 • NonClean • Cropped • Vision"/>
-  <a href="CM_RHand_Data_V1_NonClean_Cropped_Vision.html"><strong>RHand • Data_V1 • NonClean • Cropped • Vision</strong></a>
-  <div class="filename">CM_RHand_Data_V1_NonClean_Cropped_Vision.png</div>
-  <a href="CM_RHand_Data_V1_NonClean_Cropped_Vision.html"><img src="cm_outputs/CM_RHand_Data_V1_NonClean_Cropped_Vision.png" alt="RHand • Data_V1 • NonClean • Cropped • Vision thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_RHand_Data_V1_NonClean_Uncropped_Infrared.html" data-title="RHand • Data_V1 • NonClean • Uncropped • Infrared">
-  <input type="checkbox" class="selbox" aria-label="Select RHand • Data_V1 • NonClean • Uncropped • Infrared"/>
-  <a href="CM_RHand_Data_V1_NonClean_Uncropped_Infrared.html"><strong>RHand • Data_V1 • NonClean • Uncropped • Infrared</strong></a>
-  <div class="filename">CM_RHand_Data_V1_NonClean_Uncropped_Infrared.png</div>
-  <a href="CM_RHand_Data_V1_NonClean_Uncropped_Infrared.html"><img src="cm_outputs/CM_RHand_Data_V1_NonClean_Uncropped_Infrared.png" alt="RHand • Data_V1 • NonClean • Uncropped • Infrared thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_RHand_Data_V1_NonClean_Uncropped_Late_Fusion.html" data-title="RHand • Data_V1 • NonClean • Uncropped • Late • Fusion">
-  <input type="checkbox" class="selbox" aria-label="Select RHand • Data_V1 • NonClean • Uncropped • Late • Fusion"/>
-  <a href="CM_RHand_Data_V1_NonClean_Uncropped_Late_Fusion.html"><strong>RHand • Data_V1 • NonClean • Uncropped • Late • Fusion</strong></a>
-  <div class="filename">CM_RHand_Data_V1_NonClean_Uncropped_Late_Fusion.png</div>
-  <a href="CM_RHand_Data_V1_NonClean_Uncropped_Late_Fusion.html"><img src="cm_outputs/CM_RHand_Data_V1_NonClean_Uncropped_Late_Fusion.png" alt="RHand • Data_V1 • NonClean • Uncropped • Late • Fusion thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_RHand_Data_V1_NonClean_Uncropped_Thermal.html" data-title="RHand • Data_V1 • NonClean • Uncropped • Thermal">
-  <input type="checkbox" class="selbox" aria-label="Select RHand • Data_V1 • NonClean • Uncropped • Thermal"/>
-  <a href="CM_RHand_Data_V1_NonClean_Uncropped_Thermal.html"><strong>RHand • Data_V1 • NonClean • Uncropped • Thermal</strong></a>
-  <div class="filename">CM_RHand_Data_V1_NonClean_Uncropped_Thermal.png</div>
-  <a href="CM_RHand_Data_V1_NonClean_Uncropped_Thermal.html"><img src="cm_outputs/CM_RHand_Data_V1_NonClean_Uncropped_Thermal.png" alt="RHand • Data_V1 • NonClean • Uncropped • Thermal thumbnail"/></a>
-</div>
-
-<div class="card" data-page="CM_RHand_Data_V1_NonClean_Uncropped_Vision.html" data-title="RHand • Data_V1 • NonClean • Uncropped • Vision">
-  <input type="checkbox" class="selbox" aria-label="Select RHand • Data_V1 • NonClean • Uncropped • Vision"/>
-  <a href="CM_RHand_Data_V1_NonClean_Uncropped_Vision.html"><strong>RHand • Data_V1 • NonClean • Uncropped • Vision</strong></a>
-  <div class="filename">CM_RHand_Data_V1_NonClean_Uncropped_Vision.png</div>
-  <a href="CM_RHand_Data_V1_NonClean_Uncropped_Vision.html"><img src="cm_outputs/CM_RHand_Data_V1_NonClean_Uncropped_Vision.png" alt="RHand • Data_V1 • NonClean • Uncropped • Vision thumbnail"/></a>
-</div>
-
   </div>
+</div>
+<div class="box-l2">
+  <div class="title">Data_V2</div>
+  <div class="cols-l3">
+    
+<div class="box-l3">
+  <div class="title">4_Class</div>
+  
+<div class="box-l4">
+  <div class="title">Clean</div>
+  
+<div class="box-l5">
+  <div class="title">Cropped</div>
+  <div class="leafgrid">
+<div class="card" data-page="CM_Full_Data_V2_4_Class_Clean_Cropped_Infrared.html" data-title="Infrared">
+  <input type="checkbox" class="selbox" aria-label="Select Infrared"/>
+  <a href="CM_Full_Data_V2_4_Class_Clean_Cropped_Infrared.html"><strong>Infrared</strong></a>
+  <a href="CM_Full_Data_V2_4_Class_Clean_Cropped_Infrared.html"><img src="cm_outputs/CM_Full_Data_V2_4_Class_Clean_Cropped_Infrared.png" alt="Infrared thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_Full_Data_V2_4_Class_Clean_Cropped_Late_Fusion.html" data-title="Late Fusion">
+  <input type="checkbox" class="selbox" aria-label="Select Late Fusion"/>
+  <a href="CM_Full_Data_V2_4_Class_Clean_Cropped_Late_Fusion.html"><strong>Late Fusion</strong></a>
+  <a href="CM_Full_Data_V2_4_Class_Clean_Cropped_Late_Fusion.html"><img src="cm_outputs/CM_Full_Data_V2_4_Class_Clean_Cropped_Late_Fusion.png" alt="Late Fusion thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_Full_Data_V2_4_Class_Clean_Cropped_Thermal.html" data-title="Thermal">
+  <input type="checkbox" class="selbox" aria-label="Select Thermal"/>
+  <a href="CM_Full_Data_V2_4_Class_Clean_Cropped_Thermal.html"><strong>Thermal</strong></a>
+  <a href="CM_Full_Data_V2_4_Class_Clean_Cropped_Thermal.html"><img src="cm_outputs/CM_Full_Data_V2_4_Class_Clean_Cropped_Thermal.png" alt="Thermal thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_Full_Data_V2_4_Class_Clean_Cropped_Vision.html" data-title="Vision">
+  <input type="checkbox" class="selbox" aria-label="Select Vision"/>
+  <a href="CM_Full_Data_V2_4_Class_Clean_Cropped_Vision.html"><strong>Vision</strong></a>
+  <a href="CM_Full_Data_V2_4_Class_Clean_Cropped_Vision.html"><img src="cm_outputs/CM_Full_Data_V2_4_Class_Clean_Cropped_Vision.png" alt="Vision thumbnail"/></a>
+</div></div>
+</div>
+<div class="box-l5">
+  <div class="title">Uncropped</div>
+  <div class="leafgrid">
+<div class="card" data-page="CM_Full_Data_V2_4_Class_Clean_Uncropped_Infrared.html" data-title="Infrared">
+  <input type="checkbox" class="selbox" aria-label="Select Infrared"/>
+  <a href="CM_Full_Data_V2_4_Class_Clean_Uncropped_Infrared.html"><strong>Infrared</strong></a>
+  <a href="CM_Full_Data_V2_4_Class_Clean_Uncropped_Infrared.html"><img src="cm_outputs/CM_Full_Data_V2_4_Class_Clean_Uncropped_Infrared.png" alt="Infrared thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_Full_Data_V2_4_Class_Clean_Uncropped_Late_Fusion.html" data-title="Late Fusion">
+  <input type="checkbox" class="selbox" aria-label="Select Late Fusion"/>
+  <a href="CM_Full_Data_V2_4_Class_Clean_Uncropped_Late_Fusion.html"><strong>Late Fusion</strong></a>
+  <a href="CM_Full_Data_V2_4_Class_Clean_Uncropped_Late_Fusion.html"><img src="cm_outputs/CM_Full_Data_V2_4_Class_Clean_Uncropped_Late_Fusion.png" alt="Late Fusion thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_Full_Data_V2_4_Class_Clean_Uncropped_Thermal.html" data-title="Thermal">
+  <input type="checkbox" class="selbox" aria-label="Select Thermal"/>
+  <a href="CM_Full_Data_V2_4_Class_Clean_Uncropped_Thermal.html"><strong>Thermal</strong></a>
+  <a href="CM_Full_Data_V2_4_Class_Clean_Uncropped_Thermal.html"><img src="cm_outputs/CM_Full_Data_V2_4_Class_Clean_Uncropped_Thermal.png" alt="Thermal thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_Full_Data_V2_4_Class_Clean_Uncropped_Vision.html" data-title="Vision">
+  <input type="checkbox" class="selbox" aria-label="Select Vision"/>
+  <a href="CM_Full_Data_V2_4_Class_Clean_Uncropped_Vision.html"><strong>Vision</strong></a>
+  <a href="CM_Full_Data_V2_4_Class_Clean_Uncropped_Vision.html"><img src="cm_outputs/CM_Full_Data_V2_4_Class_Clean_Uncropped_Vision.png" alt="Vision thumbnail"/></a>
+</div></div>
+</div>
+</div>
+</div>
+  </div>
+</div>
+  </div>
+</section>
+<section class="cat">
+  <div class="cat-title">RHand</div>
+  <div class="cols-l2">
+    
+<div class="box-l2">
+  <div class="title">Data_V1</div>
+  <div class="cols-l3">
+    
+<div class="box-l3">
+  <div class="title">3_Class</div>
+  
+<div class="box-l4">
+  <div class="title">Clean</div>
+  
+<div class="box-l5">
+  <div class="title">Cropped</div>
+  <div class="leafgrid">
+<div class="card" data-page="CM_RHand_Data_V1_3_Class_Clean_Cropped_Infrared.html" data-title="Infrared">
+  <input type="checkbox" class="selbox" aria-label="Select Infrared"/>
+  <a href="CM_RHand_Data_V1_3_Class_Clean_Cropped_Infrared.html"><strong>Infrared</strong></a>
+  <a href="CM_RHand_Data_V1_3_Class_Clean_Cropped_Infrared.html"><img src="cm_outputs/CM_RHand_Data_V1_3_Class_Clean_Cropped_Infrared.png" alt="Infrared thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_RHand_Data_V1_3_Class_Clean_Cropped_Late_Fusion.html" data-title="Late Fusion">
+  <input type="checkbox" class="selbox" aria-label="Select Late Fusion"/>
+  <a href="CM_RHand_Data_V1_3_Class_Clean_Cropped_Late_Fusion.html"><strong>Late Fusion</strong></a>
+  <a href="CM_RHand_Data_V1_3_Class_Clean_Cropped_Late_Fusion.html"><img src="cm_outputs/CM_RHand_Data_V1_3_Class_Clean_Cropped_Late_Fusion.png" alt="Late Fusion thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_RHand_Data_V1_3_Class_Clean_Cropped_Thermal.html" data-title="Thermal">
+  <input type="checkbox" class="selbox" aria-label="Select Thermal"/>
+  <a href="CM_RHand_Data_V1_3_Class_Clean_Cropped_Thermal.html"><strong>Thermal</strong></a>
+  <a href="CM_RHand_Data_V1_3_Class_Clean_Cropped_Thermal.html"><img src="cm_outputs/CM_RHand_Data_V1_3_Class_Clean_Cropped_Thermal.png" alt="Thermal thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_RHand_Data_V1_3_Class_Clean_Cropped_Vision.html" data-title="Vision">
+  <input type="checkbox" class="selbox" aria-label="Select Vision"/>
+  <a href="CM_RHand_Data_V1_3_Class_Clean_Cropped_Vision.html"><strong>Vision</strong></a>
+  <a href="CM_RHand_Data_V1_3_Class_Clean_Cropped_Vision.html"><img src="cm_outputs/CM_RHand_Data_V1_3_Class_Clean_Cropped_Vision.png" alt="Vision thumbnail"/></a>
+</div></div>
+</div>
+<div class="box-l5">
+  <div class="title">uncropped</div>
+  <div class="leafgrid">
+<div class="card" data-page="CM_RHand_Data_V1_3_Class_Clean_uncropped_Infrared.html" data-title="Infrared">
+  <input type="checkbox" class="selbox" aria-label="Select Infrared"/>
+  <a href="CM_RHand_Data_V1_3_Class_Clean_uncropped_Infrared.html"><strong>Infrared</strong></a>
+  <a href="CM_RHand_Data_V1_3_Class_Clean_uncropped_Infrared.html"><img src="cm_outputs/CM_RHand_Data_V1_3_Class_Clean_uncropped_Infrared.png" alt="Infrared thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_RHand_Data_V1_3_Class_Clean_uncropped_Late_Fusion.html" data-title="Late Fusion">
+  <input type="checkbox" class="selbox" aria-label="Select Late Fusion"/>
+  <a href="CM_RHand_Data_V1_3_Class_Clean_uncropped_Late_Fusion.html"><strong>Late Fusion</strong></a>
+  <a href="CM_RHand_Data_V1_3_Class_Clean_uncropped_Late_Fusion.html"><img src="cm_outputs/CM_RHand_Data_V1_3_Class_Clean_uncropped_Late_Fusion.png" alt="Late Fusion thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_RHand_Data_V1_3_Class_Clean_uncropped_Thermal.html" data-title="Thermal">
+  <input type="checkbox" class="selbox" aria-label="Select Thermal"/>
+  <a href="CM_RHand_Data_V1_3_Class_Clean_uncropped_Thermal.html"><strong>Thermal</strong></a>
+  <a href="CM_RHand_Data_V1_3_Class_Clean_uncropped_Thermal.html"><img src="cm_outputs/CM_RHand_Data_V1_3_Class_Clean_uncropped_Thermal.png" alt="Thermal thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_RHand_Data_V1_3_Class_Clean_uncropped_Vision.html" data-title="Vision">
+  <input type="checkbox" class="selbox" aria-label="Select Vision"/>
+  <a href="CM_RHand_Data_V1_3_Class_Clean_uncropped_Vision.html"><strong>Vision</strong></a>
+  <a href="CM_RHand_Data_V1_3_Class_Clean_uncropped_Vision.html"><img src="cm_outputs/CM_RHand_Data_V1_3_Class_Clean_uncropped_Vision.png" alt="Vision thumbnail"/></a>
+</div></div>
+</div>
+</div>
+</div>
+<div class="box-l3">
+  <div class="title">4_Class</div>
+  
+<div class="box-l4">
+  <div class="title">Clean</div>
+  
+<div class="box-l5">
+  <div class="title">Cropped</div>
+  <div class="leafgrid">
+<div class="card" data-page="CM_RHand_Data_V1_4_Class_Clean_Cropped_Infrared.html" data-title="Infrared">
+  <input type="checkbox" class="selbox" aria-label="Select Infrared"/>
+  <a href="CM_RHand_Data_V1_4_Class_Clean_Cropped_Infrared.html"><strong>Infrared</strong></a>
+  <a href="CM_RHand_Data_V1_4_Class_Clean_Cropped_Infrared.html"><img src="cm_outputs/CM_RHand_Data_V1_4_Class_Clean_Cropped_Infrared.png" alt="Infrared thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_RHand_Data_V1_4_Class_Clean_Cropped_Late_Fusion.html" data-title="Late Fusion">
+  <input type="checkbox" class="selbox" aria-label="Select Late Fusion"/>
+  <a href="CM_RHand_Data_V1_4_Class_Clean_Cropped_Late_Fusion.html"><strong>Late Fusion</strong></a>
+  <a href="CM_RHand_Data_V1_4_Class_Clean_Cropped_Late_Fusion.html"><img src="cm_outputs/CM_RHand_Data_V1_4_Class_Clean_Cropped_Late_Fusion.png" alt="Late Fusion thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_RHand_Data_V1_4_Class_Clean_Cropped_Thermal.html" data-title="Thermal">
+  <input type="checkbox" class="selbox" aria-label="Select Thermal"/>
+  <a href="CM_RHand_Data_V1_4_Class_Clean_Cropped_Thermal.html"><strong>Thermal</strong></a>
+  <a href="CM_RHand_Data_V1_4_Class_Clean_Cropped_Thermal.html"><img src="cm_outputs/CM_RHand_Data_V1_4_Class_Clean_Cropped_Thermal.png" alt="Thermal thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_RHand_Data_V1_4_Class_Clean_Cropped_Vision.html" data-title="Vision">
+  <input type="checkbox" class="selbox" aria-label="Select Vision"/>
+  <a href="CM_RHand_Data_V1_4_Class_Clean_Cropped_Vision.html"><strong>Vision</strong></a>
+  <a href="CM_RHand_Data_V1_4_Class_Clean_Cropped_Vision.html"><img src="cm_outputs/CM_RHand_Data_V1_4_Class_Clean_Cropped_Vision.png" alt="Vision thumbnail"/></a>
+</div></div>
+</div>
+</div>
+<div class="box-l4">
+  <div class="title">NonClean</div>
+  
+<div class="box-l5">
+  <div class="title">Cropped</div>
+  <div class="leafgrid">
+<div class="card" data-page="CM_RHand_Data_V1_4_Class_NonClean_Cropped_Infrared.html" data-title="Infrared">
+  <input type="checkbox" class="selbox" aria-label="Select Infrared"/>
+  <a href="CM_RHand_Data_V1_4_Class_NonClean_Cropped_Infrared.html"><strong>Infrared</strong></a>
+  <a href="CM_RHand_Data_V1_4_Class_NonClean_Cropped_Infrared.html"><img src="cm_outputs/CM_RHand_Data_V1_4_Class_NonClean_Cropped_Infrared.png" alt="Infrared thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_RHand_Data_V1_4_Class_NonClean_Cropped_Late_Fusion.html" data-title="Late Fusion">
+  <input type="checkbox" class="selbox" aria-label="Select Late Fusion"/>
+  <a href="CM_RHand_Data_V1_4_Class_NonClean_Cropped_Late_Fusion.html"><strong>Late Fusion</strong></a>
+  <a href="CM_RHand_Data_V1_4_Class_NonClean_Cropped_Late_Fusion.html"><img src="cm_outputs/CM_RHand_Data_V1_4_Class_NonClean_Cropped_Late_Fusion.png" alt="Late Fusion thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_RHand_Data_V1_4_Class_NonClean_Cropped_Thermal.html" data-title="Thermal">
+  <input type="checkbox" class="selbox" aria-label="Select Thermal"/>
+  <a href="CM_RHand_Data_V1_4_Class_NonClean_Cropped_Thermal.html"><strong>Thermal</strong></a>
+  <a href="CM_RHand_Data_V1_4_Class_NonClean_Cropped_Thermal.html"><img src="cm_outputs/CM_RHand_Data_V1_4_Class_NonClean_Cropped_Thermal.png" alt="Thermal thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_RHand_Data_V1_4_Class_NonClean_Cropped_Vision.html" data-title="Vision">
+  <input type="checkbox" class="selbox" aria-label="Select Vision"/>
+  <a href="CM_RHand_Data_V1_4_Class_NonClean_Cropped_Vision.html"><strong>Vision</strong></a>
+  <a href="CM_RHand_Data_V1_4_Class_NonClean_Cropped_Vision.html"><img src="cm_outputs/CM_RHand_Data_V1_4_Class_NonClean_Cropped_Vision.png" alt="Vision thumbnail"/></a>
+</div></div>
+</div>
+<div class="box-l5">
+  <div class="title">Uncropped</div>
+  <div class="leafgrid">
+<div class="card" data-page="CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Infrared.html" data-title="Infrared">
+  <input type="checkbox" class="selbox" aria-label="Select Infrared"/>
+  <a href="CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Infrared.html"><strong>Infrared</strong></a>
+  <a href="CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Infrared.html"><img src="cm_outputs/CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Infrared.png" alt="Infrared thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Late_Fusion.html" data-title="Late Fusion">
+  <input type="checkbox" class="selbox" aria-label="Select Late Fusion"/>
+  <a href="CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Late_Fusion.html"><strong>Late Fusion</strong></a>
+  <a href="CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Late_Fusion.html"><img src="cm_outputs/CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Late_Fusion.png" alt="Late Fusion thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Thermal.html" data-title="Thermal">
+  <input type="checkbox" class="selbox" aria-label="Select Thermal"/>
+  <a href="CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Thermal.html"><strong>Thermal</strong></a>
+  <a href="CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Thermal.html"><img src="cm_outputs/CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Thermal.png" alt="Thermal thumbnail"/></a>
+</div>
+<div class="card" data-page="CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Vision.html" data-title="Vision">
+  <input type="checkbox" class="selbox" aria-label="Select Vision"/>
+  <a href="CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Vision.html"><strong>Vision</strong></a>
+  <a href="CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Vision.html"><img src="cm_outputs/CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Vision.png" alt="Vision thumbnail"/></a>
+</div></div>
+</div>
+</div>
+</div>
+  </div>
+</div>
+  </div>
+</section>
+
   <button id="compareBtn" class="compare-bar" disabled>Compare (select 2)</button>
   <div class="footer">Confusion Matrix</div>
 </div>
 
 <script>
 (function() {
-  const grid = document.getElementById('grid');
   const compareBtn = document.getElementById('compareBtn');
   const selCount = document.getElementById('selCount');
   const clearSel = document.getElementById('clearSel');
 
+  function getAllCards() {
+    return Array.from(document.querySelectorAll('.card'));
+  }
+  function selectedCards() {
+    return getAllCards().filter(c => c.classList.contains('selected'));
+  }
   function updateState() {
-    const selected = Array.from(grid.querySelectorAll('.card.selected'));
+    const selected = selectedCards();
     selCount.textContent = selected.length + ' selected';
     if (selected.length === 2) {
       compareBtn.disabled = false;
@@ -289,45 +385,35 @@ img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;
       compareBtn.textContent = 'Compare (select 2)';
     }
   }
-
-  grid.addEventListener('change', (e) => {
+  document.addEventListener('change', (e) => {
     const cb = e.target.closest('.selbox');
     if (!cb) return;
     const card = e.target.closest('.card');
-    if (cb.checked) {
-      card.classList.add('selected');
-    } else {
-      card.classList.remove('selected');
-    }
-    // limit to 2 selections
-    const selected = Array.from(grid.querySelectorAll('.card.selected'));
+    if (cb.checked) { card.classList.add('selected'); } else { card.classList.remove('selected'); }
+    const selected = selectedCards();
     if (selected.length > 2) {
-      // unselect the oldest
       const first = selected[0];
-      first.querySelector('.selbox').checked = false;
       first.classList.remove('selected');
+      const cbFirst = first.querySelector('.selbox');
+      if (cbFirst) cbFirst.checked = false;
     }
     updateState();
   });
-
   clearSel.addEventListener('click', () => {
-    grid.querySelectorAll('.card.selected').forEach(c => {
+    getAllCards().forEach(c => {
       c.classList.remove('selected');
       const cb = c.querySelector('.selbox');
       if (cb) cb.checked = false;
     });
     updateState();
   });
-
   compareBtn.addEventListener('click', () => {
-    const selected = Array.from(grid.querySelectorAll('.card.selected'));
+    const selected = selectedCards();
     if (selected.length !== 2) return;
     const a = selected[0].getAttribute('data-page');
     const b = selected[1].getAttribute('data-page');
-    // Navigate to compare.html with parameters
     window.location.href = 'compare.html?a=' + encodeURIComponent(a) + '&b=' + encodeURIComponent(b);
   });
-
   updateState();
 })();
 </script>
