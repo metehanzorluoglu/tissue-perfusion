@@ -1,31 +1,6 @@
 Confusion_Matrix
 ├── _cm_html_outputs
-│   ├── CM_Full_Data_V1_Uncropped_Infrared.html
-│   ├── CM_Full_Data_V1_Uncropped_Late_Fusion.html
-│   ├── CM_Full_Data_V1_Uncropped_Thermal.html
-│   ├── CM_Full_Data_V1_Uncropped_V2_Infrared.html
-│   ├── CM_Full_Data_V1_Uncropped_V2_Late_Fusion.html
-│   ├── CM_Full_Data_V1_Uncropped_V2_Thermal.html
-│   ├── CM_Full_Data_V1_Uncropped_V2_Vision.html
-│   ├── CM_Full_Data_V1_Uncropped_Vision.html
-│   ├── CM_Full_Data_V2_Cropped_Infrared.html
-│   ├── CM_Full_Data_V2_Cropped_Late_Fusion.html
-│   ├── CM_Full_Data_V2_Cropped_Thermal.html
-│   ├── CM_Full_Data_V2_Cropped_Vision.html
-│   ├── CM_Full_Data_V2_Uncropped_Infrared.html
-│   ├── CM_Full_Data_V2_Uncropped_Late_Fusion.html
-│   ├── CM_Full_Data_V2_Uncropped_Thermal.html
-│   ├── CM_Full_Data_V2_Uncropped_Vision.html
-│   ├── CM_RHand_Data_V1_Cropped_Infrared.html
-│   ├── CM_RHand_Data_V1_Cropped_Late_Fusion.html
-│   ├── CM_RHand_Data_V1_Cropped_Thermal.html
-│   ├── CM_RHand_Data_V1_Cropped_Vision.html
-│   ├── CM_RHand_Data_V1_Uncropped_Infrared.html
-│   ├── CM_RHand_Data_V1_Uncropped_Late_Fusion.html
-│   ├── CM_RHand_Data_V1_Uncropped_Thermal.html
-│   ├── CM_RHand_Data_V1_Uncropped_Vision.html
-│   └── index.html
-├── _cm_outputs
+│   └── cm_outputs
 ├── Full
 │   ├── Data_V1
 │   │   ├── Uncropped
@@ -67,24 +42,45 @@ Confusion_Matrix
 │           └── TrueVI.txt
 ├── RHand
 │   └── Data_V1
-│       ├── Cropped
-│       │   ├── PredictedIR.txt
-│       │   ├── Predictedlf.txt
-│       │   ├── PredictedTH.txt
-│       │   ├── PredictedVI.txt
-│       │   ├── TrueIR.txt
-│       │   ├── Truelf.txt
-│       │   ├── TrueTH.txt
-│       │   └── TrueVI.txt
-│       └── Uncropped
-│           ├── PredictedIR.txt
-│           ├── Predictedlf.txt
-│           ├── PredictedTH.txt
-│           ├── PredictedVI.txt
-│           ├── TrueIR.txt
-│           ├── Truelf.txt
-│           ├── TrueTH.txt
-│           └── TrueVI.txt
+│       ├── 3_Class
+│       │   └── uncropped
+│       │       ├── PredictedIR.txt
+│       │       ├── Predictedlf.txt
+│       │       ├── PredictedTH.txt
+│       │       ├── PredictedVI.txt
+│       │       ├── TrueIR.txt
+│       │       ├── Truelf.txt
+│       │       ├── TrueTH.txt
+│       │       └── TrueVI.txt
+│       ├── Clean
+│       │   └── Cropped
+│       │       ├── PredictedIR.txt
+│       │       ├── Predictedlf.txt
+│       │       ├── PredictedTH.txt
+│       │       ├── PredictedVI.txt
+│       │       ├── TrueIR.txt
+│       │       ├── Truelf.txt
+│       │       ├── TrueTH.txt
+│       │       └── TrueVI.txt
+│       └── NonClean
+│           ├── Cropped
+│           │   ├── PredictedIR.txt
+│           │   ├── Predictedlf.txt
+│           │   ├── PredictedTH.txt
+│           │   ├── PredictedVI.txt
+│           │   ├── TrueIR.txt
+│           │   ├── Truelf.txt
+│           │   ├── TrueTH.txt
+│           │   └── TrueVI.txt
+│           └── Uncropped
+│               ├── PredictedIR.txt
+│               ├── Predictedlf.txt
+│               ├── PredictedTH.txt
+│               ├── PredictedVI.txt
+│               ├── TrueIR.txt
+│               ├── Truelf.txt
+│               ├── TrueTH.txt
+│               └── TrueVI.txt
 ├── build_confusions.py
 ├── make_cm_html.py
 ├── map_confusion_matrix.py

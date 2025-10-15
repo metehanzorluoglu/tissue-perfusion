@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Compare Confusion Matrices</title>
+<style>
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; color: #111; }
+h1 { font-size: 22px; margin: 0 0 8px 0; }
+h2 { font-size: 16px; color: #333; margin-top: 20px; }
+.container { max-width: 1200px; }
+.meta { color: #555; font-size: 13px; margin-bottom: 16px; }
+figure { margin: 0; }
+img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; }
+.cm { border-collapse: collapse; width: 100%; margin-top: 12px; }
+.cm th, .cm td { border: 1px solid #e5e5e5; padding: 6px 8px; font-size: 13px; text-align: center; }
+.cm thead th { background: #fafafa; position: sticky; top: 0; }
+.footer { margin-top: 24px; font-size: 12px; color: #666; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.card { border: 1px solid #e7e7e7; border-radius: 10px; padding: 12px; background: #fff; position: relative; }
+.card a { text-decoration: none; color: #0a58ca; }
+.filename { color: #666; font-size: 12px; margin-top: 4px; }
+.selbox { position: absolute; top: 10px; right: 10px; transform: scale(1.2); }
+.card.selected { outline: 3px solid #0a58ca; outline-offset: 2px; }
+.compare-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #0a58ca; color: #fff; border-radius: 999px; padding: 10px 16px; font-weight: 600; box-shadow: 0 6px 20px rgba(0,0,0,.15); cursor: not-allowed; opacity: .4; }
+.compare-bar.enabled { cursor: pointer; opacity: 1; }
+.toolbar { display:flex; gap:10px; align-items:center; margin: 8px 0 16px;}
+.badge { background:#eee; border-radius: 999px; padding:2px 8px; font-size:12px; color:#333; }
+.split { display:flex; gap:10px; }
+.pane { flex:1; min-height: 75vh; border:1px solid #e5e5e5; border-radius:8px; overflow:hidden; }
+.pane iframe { width:100%; height:100%; border:0; }
+.toggle { border:1px solid #ccc; background:#fff; padding:6px 10px; border-radius:8px; cursor:pointer; }
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="confusion.html">← Back to index</a>
+  <h1>Compare</h1>
+  <div class="toolbar">
+    <button class="toggle" id="swapBtn" type="button">Swap left/right</button>
+    <button class="toggle" id="modeBtn" type="button" aria-pressed="false">Mode: Full page</button>
+  </div>
+  <div class="split">
+    <div class="pane"><iframe id="left"></iframe></div>
+    <div class="pane"><iframe id="right"></iframe></div>
+  </div>
+  <div class="footer">Tip: scroll either pane to sync the other.</div>
+</div>
+
+<script>
+(function() {
+  function qs(name) {
+    const u = new URL(window.location.href);
+    return u.searchParams.get(name);
+  }
+  const left = document.getElementById('left');
+  const right = document.getElementById('right');
+  const swapBtn = document.getElementById('swapBtn');
+  const modeBtn = document.getElementById('modeBtn');
+
+  let a = qs('a');
+  let b = qs('b');
+  let mode = qs('mode') || 'full'; // 'full' | 'images'
+
+  function setModeButton() {
+    const imgMode = (mode === 'images');
+    modeBtn.textContent = 'Mode: ' + (imgMode ? 'Images only' : 'Full page');
+    modeBtn.setAttribute('aria-pressed', String(imgMode));
+  }
+
+  function loadIframes() {
+    if (!a || !b) {
+        document.body.insertAdjacentHTML('beforeend', '<p style="color:#b00">Missing ?a and ?b params.</p>');
+        return;
+    }
+    if (mode === 'images') {
+      // Build lightweight image-only pages on the fly via data URLs that embed the <img> from each pair page path
+      left.src = 'about:blank';
+      right.src = 'about:blank';
+      fetch(a).then(r => r.text()).then(t => {
+        const m = t.match(/<img src="([^"]+)"/i);
+        const title = (t.match(/<h1>(.*?)<\/h1>/i)||[])[1] || a;
+        const img = m ? m[1] : '';
+        const html = '<!doctype html><meta charset="utf-8"><title>'+title+'</title><style>body{margin:8px;font-family:system-ui}img{max-width:100%;height:auto;border:1px solid #ddd;border-radius:8px}</style><h3>'+title+'</h3>'+(img?'<img src="'+img+'">':'<p>No image found</p>');
+        left.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+      });
+      fetch(b).then(r => r.text()).then(t => {
+        const m = t.match(/<img src="([^"]+)"/i);
+        const title = (t.match(/<h1>(.*?)<\/h1>/i)||[])[1] || b;
+        const img = m ? m[1] : '';
+        const html = '<!doctype html><meta charset="utf-8"><title>'+title+'</title><style>body{margin:8px;font-family:system-ui}img{max-width:100%;height:auto;border:1px solid #ddd;border-radius:8px}</style><h3>'+title+'</h3>'+(img?'<img src="'+img+'">':'<p>No image found</p>');
+        right.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+      });
+    } else {
+      left.src = a;
+      right.src = b;
+    }
+  }
+
+  // Sync scroll positions (throttled)
+  function syncScroll(src, dst) {
+    try {
+      const sDoc = src.contentDocument;
+      const dDoc = dst.contentDocument;
+      if (!sDoc || !dDoc) return;
+      const sEl = sDoc.scrollingElement || sDoc.documentElement;
+      const dEl = dDoc.scrollingElement || dDoc.documentElement;
+      const ratio = sEl.scrollTop / (sEl.scrollHeight - sEl.clientHeight || 1);
+      dEl.scrollTop = ratio * (dEl.scrollHeight - dEl.clientHeight);
+    } catch (e) { /* cross-origin not an issue here; just guard */ }
+  }
+
+  function attachSync() {
+    let ticking = false;
+    function onScrollL() {
+      if (!ticking) {
+        window.requestAnimationFrame(() => { syncScroll(left, right); ticking = false; });
+        ticking = true;
+      }
+    }
+    function onScrollR() {
+      if (!ticking) {
+        window.requestAnimationFrame(() => { syncScroll(right, left); ticking = false; });
+        ticking = true;
+      }
+    }
+    left.addEventListener('load', () => {
+      try {
+        left.contentWindow.addEventListener('scroll', onScrollL, { passive: true });
+      } catch (e) {}
+    });
+    right.addEventListener('load', () => {
+      try {
+        right.contentWindow.addEventListener('scroll', onScrollR, { passive: true });
+      } catch (e) {}
+    });
+  }
+
+  swapBtn.addEventListener('click', () => {
+    const tmp = a; a = b; b = tmp;
+    loadIframes();
+  });
+
+  modeBtn.addEventListener('click', () => {
+    mode = (mode === 'images') ? 'full' : 'images';
+    setModeButton();
+    loadIframes();
+  });
+
+  setModeButton();
+  loadIframes();
+  attachSync();
+})();
+</script>
+</body>
+</html>
