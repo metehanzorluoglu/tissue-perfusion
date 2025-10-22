@@ -1,6 +1,22 @@
 Confusion_Matrix
 ├── _cm_html_outputs
 │   ├── cm_outputs
+│   │   ├── CM_Full_Data_V1_3_Class_Clean_Cropped_Infrared.csv
+│   │   ├── CM_Full_Data_V1_3_Class_Clean_Cropped_Infrared.png
+│   │   ├── CM_Full_Data_V1_3_Class_Clean_Cropped_Late_Fusion.csv
+│   │   ├── CM_Full_Data_V1_3_Class_Clean_Cropped_Late_Fusion.png
+│   │   ├── CM_Full_Data_V1_3_Class_Clean_Cropped_Thermal.csv
+│   │   ├── CM_Full_Data_V1_3_Class_Clean_Cropped_Thermal.png
+│   │   ├── CM_Full_Data_V1_3_Class_Clean_Cropped_Vision.csv
+│   │   ├── CM_Full_Data_V1_3_Class_Clean_Cropped_Vision.png
+│   │   ├── CM_Full_Data_V1_3_Class_Clean_uncropped_Infrared.csv
+│   │   ├── CM_Full_Data_V1_3_Class_Clean_uncropped_Infrared.png
+│   │   ├── CM_Full_Data_V1_3_Class_Clean_uncropped_Late_Fusion.csv
+│   │   ├── CM_Full_Data_V1_3_Class_Clean_uncropped_Late_Fusion.png
+│   │   ├── CM_Full_Data_V1_3_Class_Clean_uncropped_Thermal.csv
+│   │   ├── CM_Full_Data_V1_3_Class_Clean_uncropped_Thermal.png
+│   │   ├── CM_Full_Data_V1_3_Class_Clean_uncropped_Vision.csv
+│   │   ├── CM_Full_Data_V1_3_Class_Clean_uncropped_Vision.png
 │   │   ├── CM_Full_Data_V1_4_Class_Clean_Uncropped_Infrared.csv
 │   │   ├── CM_Full_Data_V1_4_Class_Clean_Uncropped_Infrared.png
 │   │   ├── CM_Full_Data_V1_4_Class_Clean_Uncropped_Late_Fusion.csv
@@ -17,6 +33,22 @@ Confusion_Matrix
 │   │   ├── CM_Full_Data_V1_4_Class_NonClean_Uncropped_Thermal.png
 │   │   ├── CM_Full_Data_V1_4_Class_NonClean_Uncropped_Vision.csv
 │   │   ├── CM_Full_Data_V1_4_Class_NonClean_Uncropped_Vision.png
+│   │   ├── CM_Full_Data_V2_4_Class_Clean_Cropped_Infrared.csv
+│   │   ├── CM_Full_Data_V2_4_Class_Clean_Cropped_Infrared.png
+│   │   ├── CM_Full_Data_V2_4_Class_Clean_Cropped_Late_Fusion.csv
+│   │   ├── CM_Full_Data_V2_4_Class_Clean_Cropped_Late_Fusion.png
+│   │   ├── CM_Full_Data_V2_4_Class_Clean_Cropped_Thermal.csv
+│   │   ├── CM_Full_Data_V2_4_Class_Clean_Cropped_Thermal.png
+│   │   ├── CM_Full_Data_V2_4_Class_Clean_Cropped_Vision.csv
+│   │   ├── CM_Full_Data_V2_4_Class_Clean_Cropped_Vision.png
+│   │   ├── CM_Full_Data_V2_4_Class_Clean_Uncropped_Infrared.csv
+│   │   ├── CM_Full_Data_V2_4_Class_Clean_Uncropped_Infrared.png
+│   │   ├── CM_Full_Data_V2_4_Class_Clean_Uncropped_Late_Fusion.csv
+│   │   ├── CM_Full_Data_V2_4_Class_Clean_Uncropped_Late_Fusion.png
+│   │   ├── CM_Full_Data_V2_4_Class_Clean_Uncropped_Thermal.csv
+│   │   ├── CM_Full_Data_V2_4_Class_Clean_Uncropped_Thermal.png
+│   │   ├── CM_Full_Data_V2_4_Class_Clean_Uncropped_Vision.csv
+│   │   ├── CM_Full_Data_V2_4_Class_Clean_Uncropped_Vision.png
 │   │   ├── CM_Full_Data_V2_4_Class_Cropped_Infrared.csv
 │   │   ├── CM_Full_Data_V2_4_Class_Cropped_Infrared.png
 │   │   ├── CM_Full_Data_V2_4_Class_Cropped_Late_Fusion.csv
@@ -76,6 +108,14 @@ Confusion_Matrix
 │   │   ├── outputs_map.txt
 │   │   ├── route_map.txt
 │   │   └── summary.csv
+│   ├── CM_Full_Data_V1_3_Class_Clean_Cropped_Infrared.html
+│   ├── CM_Full_Data_V1_3_Class_Clean_Cropped_Late_Fusion.html
+│   ├── CM_Full_Data_V1_3_Class_Clean_Cropped_Thermal.html
+│   ├── CM_Full_Data_V1_3_Class_Clean_Cropped_Vision.html
+│   ├── CM_Full_Data_V1_3_Class_Clean_uncropped_Infrared.html
+│   ├── CM_Full_Data_V1_3_Class_Clean_uncropped_Late_Fusion.html
+│   ├── CM_Full_Data_V1_3_Class_Clean_uncropped_Thermal.html
+│   ├── CM_Full_Data_V1_3_Class_Clean_uncropped_Vision.html
 │   ├── CM_Full_Data_V1_4_Class_Clean_Uncropped_Infrared.html
 │   ├── CM_Full_Data_V1_4_Class_Clean_Uncropped_Late_Fusion.html
 │   ├── CM_Full_Data_V1_4_Class_Clean_Uncropped_Thermal.html
@@ -84,6 +124,14 @@ Confusion_Matrix
 │   ├── CM_Full_Data_V1_4_Class_NonClean_Uncropped_Late_Fusion.html
 │   ├── CM_Full_Data_V1_4_Class_NonClean_Uncropped_Thermal.html
 │   ├── CM_Full_Data_V1_4_Class_NonClean_Uncropped_Vision.html
+│   ├── CM_Full_Data_V2_4_Class_Clean_Cropped_Infrared.html
+│   ├── CM_Full_Data_V2_4_Class_Clean_Cropped_Late_Fusion.html
+│   ├── CM_Full_Data_V2_4_Class_Clean_Cropped_Thermal.html
+│   ├── CM_Full_Data_V2_4_Class_Clean_Cropped_Vision.html
+│   ├── CM_Full_Data_V2_4_Class_Clean_Uncropped_Infrared.html
+│   ├── CM_Full_Data_V2_4_Class_Clean_Uncropped_Late_Fusion.html
+│   ├── CM_Full_Data_V2_4_Class_Clean_Uncropped_Thermal.html
+│   ├── CM_Full_Data_V2_4_Class_Clean_Uncropped_Vision.html
 │   ├── CM_Full_Data_V2_4_Class_Cropped_Infrared.html
 │   ├── CM_Full_Data_V2_4_Class_Cropped_Late_Fusion.html
 │   ├── CM_Full_Data_V2_4_Class_Cropped_Thermal.html
@@ -116,6 +164,26 @@ Confusion_Matrix
 │   └── confusion.html
 ├── Full
 │   ├── Data_V1
+│   │   ├── 3_Class
+│   │   │   └── Clean
+│   │   │       ├── Cropped
+│   │   │       │   ├── PredictedIR.txt
+│   │   │       │   ├── Predictedlf.txt
+│   │   │       │   ├── PredictedTH.txt
+│   │   │       │   ├── PredictedVI.txt
+│   │   │       │   ├── TrueIR.txt
+│   │   │       │   ├── Truelf.txt
+│   │   │       │   ├── TrueTH.txt
+│   │   │       │   └── TrueVI.txt
+│   │   │       └── uncropped
+│   │   │           ├── PredictedIR.txt
+│   │   │           ├── Predictedlf.txt
+│   │   │           ├── PredictedTH.txt
+│   │   │           ├── PredictedVI.txt
+│   │   │           ├── TrueIR.txt
+│   │   │           ├── Truelf.txt
+│   │   │           ├── TrueTH.txt
+│   │   │           └── TrueVI.txt
 │   │   └── 4_Class
 │   │       ├── Clean
 │   │       │   └── Uncropped

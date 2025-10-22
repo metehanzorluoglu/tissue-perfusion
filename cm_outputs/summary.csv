@@ -1,12 +1,12 @@
 title,path_parent,modality_key,modality_name,total_images,accuracy
-RHand • Data_V1 • 3_Class • Clean • uncropped • Infrared,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/3_Class/Clean/uncropped,ir,Infrared,1439,0.485059
-RHand • Data_V1 • 3_Class • Clean • uncropped • Thermal,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/3_Class/Clean/uncropped,th,Thermal,1439,0.364837
-RHand • Data_V1 • 3_Class • Clean • uncropped • Vision,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/3_Class/Clean/uncropped,vi,Vision,1439,0.613621
-RHand • Data_V1 • 3_Class • Clean • uncropped • Late Fusion,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/3_Class/Clean/uncropped,lf,Late Fusion,1439,0.583044
-RHand • Data_V1 • 3_Class • Clean • Cropped • Infrared,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/3_Class/Clean/Cropped,ir,Infrared,1439,0.530924
-RHand • Data_V1 • 3_Class • Clean • Cropped • Thermal,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/3_Class/Clean/Cropped,th,Thermal,1439,0.473245
-RHand • Data_V1 • 3_Class • Clean • Cropped • Vision,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/3_Class/Clean/Cropped,vi,Vision,1439,0.579569
-RHand • Data_V1 • 3_Class • Clean • Cropped • Late Fusion,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/3_Class/Clean/Cropped,lf,Late Fusion,1439,0.695622
+RHand • Data_V1 • 3_Class • Clean • uncropped • Infrared,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/3_Class/Clean/uncropped,ir,Infrared,480,0.395833
+RHand • Data_V1 • 3_Class • Clean • uncropped • Thermal,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/3_Class/Clean/uncropped,th,Thermal,480,0.335417
+RHand • Data_V1 • 3_Class • Clean • uncropped • Vision,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/3_Class/Clean/uncropped,vi,Vision,480,0.645833
+RHand • Data_V1 • 3_Class • Clean • uncropped • Late Fusion,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/3_Class/Clean/uncropped,lf,Late Fusion,480,0.45625
+RHand • Data_V1 • 3_Class • Clean • Cropped • Infrared,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/3_Class/Clean/Cropped,ir,Infrared,480,0.297917
+RHand • Data_V1 • 3_Class • Clean • Cropped • Thermal,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/3_Class/Clean/Cropped,th,Thermal,480,0.489583
+RHand • Data_V1 • 3_Class • Clean • Cropped • Vision,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/3_Class/Clean/Cropped,vi,Vision,480,0.25
+RHand • Data_V1 • 3_Class • Clean • Cropped • Late Fusion,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/3_Class/Clean/Cropped,lf,Late Fusion,480,0.752083
 RHand • Data_V1 • 4_Class • NonClean • Uncropped • Infrared,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/4_Class/NonClean/Uncropped,ir,Infrared,719,0.319889
 RHand • Data_V1 • 4_Class • NonClean • Uncropped • Thermal,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/4_Class/NonClean/Uncropped,th,Thermal,719,0.602225
 RHand • Data_V1 • 4_Class • NonClean • Uncropped • Vision,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/RHand/Data_V1/4_Class/NonClean/Uncropped,vi,Vision,719,0.496523
@@ -27,6 +27,14 @@ Full • Data_V2 • 4_Class • Clean • Cropped • Infrared,/Users/metehanzo
 Full • Data_V2 • 4_Class • Clean • Cropped • Thermal,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V2/4_Class/Clean/Cropped,th,Thermal,4318,0.559981
 Full • Data_V2 • 4_Class • Clean • Cropped • Vision,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V2/4_Class/Clean/Cropped,vi,Vision,4318,0.586846
 Full • Data_V2 • 4_Class • Clean • Cropped • Late Fusion,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V2/4_Class/Clean/Cropped,lf,Late Fusion,4318,0.650069
+Full • Data_V1 • 3_Class • Clean • uncropped • Infrared,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/3_Class/Clean/uncropped,ir,Infrared,1439,0.485059
+Full • Data_V1 • 3_Class • Clean • uncropped • Thermal,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/3_Class/Clean/uncropped,th,Thermal,1439,0.364837
+Full • Data_V1 • 3_Class • Clean • uncropped • Vision,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/3_Class/Clean/uncropped,vi,Vision,1439,0.613621
+Full • Data_V1 • 3_Class • Clean • uncropped • Late Fusion,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/3_Class/Clean/uncropped,lf,Late Fusion,1439,0.583044
+Full • Data_V1 • 3_Class • Clean • Cropped • Infrared,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/3_Class/Clean/Cropped,ir,Infrared,1439,0.530924
+Full • Data_V1 • 3_Class • Clean • Cropped • Thermal,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/3_Class/Clean/Cropped,th,Thermal,1439,0.473245
+Full • Data_V1 • 3_Class • Clean • Cropped • Vision,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/3_Class/Clean/Cropped,vi,Vision,1439,0.579569
+Full • Data_V1 • 3_Class • Clean • Cropped • Late Fusion,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/3_Class/Clean/Cropped,lf,Late Fusion,1439,0.695622
 Full • Data_V1 • 4_Class • NonClean • Uncropped • Infrared,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/4_Class/NonClean/Uncropped,ir,Infrared,2158,0.26089
 Full • Data_V1 • 4_Class • NonClean • Uncropped • Thermal,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/4_Class/NonClean/Uncropped,th,Thermal,2158,0.417053
 Full • Data_V1 • 4_Class • NonClean • Uncropped • Vision,/Users/metehanzorluoglu/tissue pefusion/Confusion_Matrix/Full/Data_V1/4_Class/NonClean/Uncropped,vi,Vision,2158,0.517146

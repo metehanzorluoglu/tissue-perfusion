@@ -1,4 +1,20 @@
 cm_outputs
+├── CM_Full_Data_V1_3_Class_Clean_Cropped_Infrared.csv
+├── CM_Full_Data_V1_3_Class_Clean_Cropped_Infrared.png
+├── CM_Full_Data_V1_3_Class_Clean_Cropped_Late_Fusion.csv
+├── CM_Full_Data_V1_3_Class_Clean_Cropped_Late_Fusion.png
+├── CM_Full_Data_V1_3_Class_Clean_Cropped_Thermal.csv
+├── CM_Full_Data_V1_3_Class_Clean_Cropped_Thermal.png
+├── CM_Full_Data_V1_3_Class_Clean_Cropped_Vision.csv
+├── CM_Full_Data_V1_3_Class_Clean_Cropped_Vision.png
+├── CM_Full_Data_V1_3_Class_Clean_uncropped_Infrared.csv
+├── CM_Full_Data_V1_3_Class_Clean_uncropped_Infrared.png
+├── CM_Full_Data_V1_3_Class_Clean_uncropped_Late_Fusion.csv
+├── CM_Full_Data_V1_3_Class_Clean_uncropped_Late_Fusion.png
+├── CM_Full_Data_V1_3_Class_Clean_uncropped_Thermal.csv
+├── CM_Full_Data_V1_3_Class_Clean_uncropped_Thermal.png
+├── CM_Full_Data_V1_3_Class_Clean_uncropped_Vision.csv
+├── CM_Full_Data_V1_3_Class_Clean_uncropped_Vision.png
 ├── CM_Full_Data_V1_4_Class_Clean_Uncropped_Infrared.csv
 ├── CM_Full_Data_V1_4_Class_Clean_Uncropped_Infrared.png
 ├── CM_Full_Data_V1_4_Class_Clean_Uncropped_Late_Fusion.csv
