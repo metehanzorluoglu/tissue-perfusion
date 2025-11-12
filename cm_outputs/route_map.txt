@@ -1,60 +1,6 @@
 Confusion_Matrix
 ├── _cm_html_outputs
-│   ├── cm_outputs
-│   ├── CM_Full_Data_V1_3_Class_Clean_Cropped_Infrared.html
-│   ├── CM_Full_Data_V1_3_Class_Clean_Cropped_Late_Fusion.html
-│   ├── CM_Full_Data_V1_3_Class_Clean_Cropped_Thermal.html
-│   ├── CM_Full_Data_V1_3_Class_Clean_Cropped_Vision.html
-│   ├── CM_Full_Data_V1_3_Class_Clean_uncropped_Infrared.html
-│   ├── CM_Full_Data_V1_3_Class_Clean_uncropped_Late_Fusion.html
-│   ├── CM_Full_Data_V1_3_Class_Clean_uncropped_Thermal.html
-│   ├── CM_Full_Data_V1_3_Class_Clean_uncropped_Vision.html
-│   ├── CM_Full_Data_V1_4_Class_Clean_Uncropped_Infrared.html
-│   ├── CM_Full_Data_V1_4_Class_Clean_Uncropped_Late_Fusion.html
-│   ├── CM_Full_Data_V1_4_Class_Clean_Uncropped_Thermal.html
-│   ├── CM_Full_Data_V1_4_Class_Clean_Uncropped_Vision.html
-│   ├── CM_Full_Data_V1_4_Class_NonClean_Uncropped_Infrared.html
-│   ├── CM_Full_Data_V1_4_Class_NonClean_Uncropped_Late_Fusion.html
-│   ├── CM_Full_Data_V1_4_Class_NonClean_Uncropped_Thermal.html
-│   ├── CM_Full_Data_V1_4_Class_NonClean_Uncropped_Vision.html
-│   ├── CM_Full_Data_V2_4_Class_Clean_Cropped_Infrared.html
-│   ├── CM_Full_Data_V2_4_Class_Clean_Cropped_Late_Fusion.html
-│   ├── CM_Full_Data_V2_4_Class_Clean_Cropped_Thermal.html
-│   ├── CM_Full_Data_V2_4_Class_Clean_Cropped_Vision.html
-│   ├── CM_Full_Data_V2_4_Class_Clean_Uncropped_Infrared.html
-│   ├── CM_Full_Data_V2_4_Class_Clean_Uncropped_Late_Fusion.html
-│   ├── CM_Full_Data_V2_4_Class_Clean_Uncropped_Thermal.html
-│   ├── CM_Full_Data_V2_4_Class_Clean_Uncropped_Vision.html
-│   ├── CM_Full_Data_V2_4_Class_Cropped_Infrared.html
-│   ├── CM_Full_Data_V2_4_Class_Cropped_Late_Fusion.html
-│   ├── CM_Full_Data_V2_4_Class_Cropped_Thermal.html
-│   ├── CM_Full_Data_V2_4_Class_Cropped_Vision.html
-│   ├── CM_Full_Data_V2_4_Class_Uncropped_Infrared.html
-│   ├── CM_Full_Data_V2_4_Class_Uncropped_Late_Fusion.html
-│   ├── CM_Full_Data_V2_4_Class_Uncropped_Thermal.html
-│   ├── CM_Full_Data_V2_4_Class_Uncropped_Vision.html
-│   ├── CM_RHand_Data_V1_3_Class_Clean_Cropped_Infrared.html
-│   ├── CM_RHand_Data_V1_3_Class_Clean_Cropped_Late_Fusion.html
-│   ├── CM_RHand_Data_V1_3_Class_Clean_Cropped_Thermal.html
-│   ├── CM_RHand_Data_V1_3_Class_Clean_Cropped_Vision.html
-│   ├── CM_RHand_Data_V1_3_Class_Clean_uncropped_Infrared.html
-│   ├── CM_RHand_Data_V1_3_Class_Clean_uncropped_Late_Fusion.html
-│   ├── CM_RHand_Data_V1_3_Class_Clean_uncropped_Thermal.html
-│   ├── CM_RHand_Data_V1_3_Class_Clean_uncropped_Vision.html
-│   ├── CM_RHand_Data_V1_4_Class_Clean_Cropped_Infrared.html
-│   ├── CM_RHand_Data_V1_4_Class_Clean_Cropped_Late_Fusion.html
-│   ├── CM_RHand_Data_V1_4_Class_Clean_Cropped_Thermal.html
-│   ├── CM_RHand_Data_V1_4_Class_Clean_Cropped_Vision.html
-│   ├── CM_RHand_Data_V1_4_Class_NonClean_Cropped_Infrared.html
-│   ├── CM_RHand_Data_V1_4_Class_NonClean_Cropped_Late_Fusion.html
-│   ├── CM_RHand_Data_V1_4_Class_NonClean_Cropped_Thermal.html
-│   ├── CM_RHand_Data_V1_4_Class_NonClean_Cropped_Vision.html
-│   ├── CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Infrared.html
-│   ├── CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Late_Fusion.html
-│   ├── CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Thermal.html
-│   ├── CM_RHand_Data_V1_4_Class_NonClean_Uncropped_Vision.html
-│   ├── compare.html
-│   └── confusion.html
+│   └── cm_outputs
 ├── Full
 │   ├── Data_V1
 │   │   └── Unseen
@@ -128,42 +74,66 @@ Confusion_Matrix
 │       │       └── Clean
 │       │           ├── Cropped
 │       │           │   ├── PredictedIR.txt
+│       │           │   ├── PredictedIRTH.txt
+│       │           │   ├── PredictedIRVI.txt
 │       │           │   ├── Predictedlf.txt
 │       │           │   ├── PredictedTH.txt
+│       │           │   ├── PredictedTHVI.txt
 │       │           │   ├── PredictedVI.txt
 │       │           │   ├── TrueIR.txt
+│       │           │   ├── TrueIRTH.txt
+│       │           │   ├── TrueIRVI.txt
 │       │           │   ├── Truelf.txt
 │       │           │   ├── TrueTH.txt
+│       │           │   ├── TrueTHVI.txt
 │       │           │   └── TrueVI.txt
 │       │           └── uncropped
 │       │               ├── PredictedIR.txt
+│       │               ├── PredictedIRTH.txt
+│       │               ├── PredictedIRVI.txt
 │       │               ├── Predictedlf.txt
 │       │               ├── PredictedTH.txt
+│       │               ├── PredictedTHVI.txt
 │       │               ├── PredictedVI.txt
 │       │               ├── TrueIR.txt
+│       │               ├── TrueIRTH.txt
+│       │               ├── TrueIRVI.txt
 │       │               ├── Truelf.txt
 │       │               ├── TrueTH.txt
+│       │               ├── TrueTHVI.txt
 │       │               └── TrueVI.txt
 │       └── Unseen
 │           ├── 3_Class
 │           │   └── Clean
 │           │       ├── Cropped
 │           │       │   ├── PredictedIR.txt
+│           │       │   ├── PredictedIRTH.txt
+│           │       │   ├── PredictedIRVI.txt
 │           │       │   ├── Predictedlf.txt
 │           │       │   ├── PredictedTH.txt
+│           │       │   ├── PredictedTHVI.txt
 │           │       │   ├── PredictedVI.txt
 │           │       │   ├── TrueIR.txt
+│           │       │   ├── TrueIRTH.txt
+│           │       │   ├── TrueIRVI.txt
 │           │       │   ├── Truelf.txt
 │           │       │   ├── TrueTH.txt
+│           │       │   ├── TrueTHVI.txt
 │           │       │   └── TrueVI.txt
 │           │       └── uncropped
 │           │           ├── PredictedIR.txt
+│           │           ├── PredictedIRTH.txt
+│           │           ├── PredictedIRVI.txt
 │           │           ├── Predictedlf.txt
 │           │           ├── PredictedTH.txt
+│           │           ├── PredictedTHVI.txt
 │           │           ├── PredictedVI.txt
 │           │           ├── TrueIR.txt
+│           │           ├── TrueIRTH.txt
+│           │           ├── TrueIRVI.txt
 │           │           ├── Truelf.txt
 │           │           ├── TrueTH.txt
+│           │           ├── TrueTHVI.txt
 │           │           └── TrueVI.txt
 │           └── 4_Class
 │               ├── Clean
@@ -179,21 +149,33 @@ Confusion_Matrix
 │               └── NonClean
 │                   ├── Cropped
 │                   │   ├── PredictedIR.txt
+│                   │   ├── PredictedIRTH.txt
+│                   │   ├── PredictedIRVI.txt
 │                   │   ├── Predictedlf.txt
 │                   │   ├── PredictedTH.txt
+│                   │   ├── PredictedTHVI.txt
 │                   │   ├── PredictedVI.txt
 │                   │   ├── TrueIR.txt
+│                   │   ├── TrueIRTH.txt
+│                   │   ├── TrueIRVI.txt
 │                   │   ├── Truelf.txt
 │                   │   ├── TrueTH.txt
+│                   │   ├── TrueTHVI.txt
 │                   │   └── TrueVI.txt
 │                   └── Uncropped
 │                       ├── PredictedIR.txt
+│                       ├── PredictedIRTH.txt
+│                       ├── PredictedIRVI.txt
 │                       ├── Predictedlf.txt
 │                       ├── PredictedTH.txt
+│                       ├── PredictedTHVI.txt
 │                       ├── PredictedVI.txt
 │                       ├── TrueIR.txt
+│                       ├── TrueIRTH.txt
+│                       ├── TrueIRVI.txt
 │                       ├── Truelf.txt
 │                       ├── TrueTH.txt
+│                       ├── TrueTHVI.txt
 │                       └── TrueVI.txt
 ├── build_confusions.py
 ├── make_cm_html.py
